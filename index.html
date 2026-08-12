@@ -145,7 +145,7 @@ body {
 
     height: 3px;
 
-    background: #e7bd59;
+    background: #9b7cff;
 
     border-radius: 50%;
 
@@ -671,7 +671,7 @@ h1 {
 
 
 /* =====================================================
-   FLOATING BUBBLES
+   FLOATING BUBBLES — RIGHT SIDE AROUND LOGO
 ===================================================== */
 
 .feature {
@@ -688,28 +688,23 @@ h1 {
 
     gap: 9px;
 
-    background:
-        rgba(10,9,6,.82);
+    background: rgba(8,7,20,.78);
 
-    border:
-        1px solid
-        rgba(218,170,55,.25);
+    border: 1px solid rgba(124,77,255,.35);
 
-    color: #eee7d7;
+    color: #eeeafa;
 
     font-size: 14px;
 
     font-weight: 700;
 
-    backdrop-filter:
-        blur(15px);
+    backdrop-filter: blur(15px);
 
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.4);
+    box-shadow: 0 15px 45px rgba(0,0,0,.4);
 
-    animation:
-        float 5s ease-in-out infinite;
+    z-index: 5;
+
+    animation: float 5s ease-in-out infinite;
 }
 
 
@@ -732,17 +727,17 @@ h1 {
 
 .feature.one {
 
-    top: 7%;
+    top: 8%;
 
-    right: 0;
+    right: -2%;
 }
 
 
 .feature.two {
 
-    top: 27%;
+    top: 28%;
 
-    left: -2%;
+    left: 2%;
 
     animation-delay: 1s;
 }
@@ -750,7 +745,7 @@ h1 {
 
 .feature.three {
 
-    bottom: 18%;
+    top: 68%;
 
     left: 0;
 
@@ -760,9 +755,9 @@ h1 {
 
 .feature.four {
 
-    bottom: 4%;
+    top: 78%;
 
-    right: 0;
+    right: -1%;
 
     animation-delay: 3s;
 }
@@ -772,7 +767,7 @@ h1 {
 
     top: 49%;
 
-    right: -3%;
+    right: -5%;
 
     animation-delay: 1.5s;
 }
