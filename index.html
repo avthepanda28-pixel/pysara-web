@@ -1,752 +1,1693 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Lurex Kingdom | Official Community</title>
 
-<style>  @import url( 'https\://fonts.googleapis.com/css2?family=Inter\:wght\@400;500;600;700;800;900&display=swap' );   /* =====================================================    GLOBAL ===================================================== */  * {     margin: 0;     padding: 0;     box-sizing: border-box; }  html {     scroll-behavior: smooth; }  body {      font-family: "Inter", sans-serif;      background: #070611;      color: #ffffff;      overflow-x: hidden; }   /* =====================================================    BACKGROUND ===================================================== */  .background {      position: fixed;      inset: 0;      z-index: -20;      background:          radial-gradient(             circle at 75% 30%,             rgba(139,92,246,.16),             transparent 32%         ),          radial-gradient(             circle at 15% 80%,             rgba(34,211,238,.09),             transparent 30%         ),          linear-gradient(             135deg,             #05030d,             #0d0820,             #06040f         ); }   .glow {      position: fixed;      border-radius: 50%;      filter: blur(120px);      pointer-events: none;      z-index: -15; }   .glow\.one {      width: 500px;      height: 500px;      background:         rgba(34,211,238,.09);      top: 10%;      right: 0; }   .glow\.two {      width: 400px;      height: 400px;      background:         rgba(236,72,153,.07);      bottom: 5%;      left: 0; }   /* =====================================================    PARTICLES ===================================================== */  .stars {      position: fixed;      inset: 0;      pointer-events: none;      z-index: -10; }   .star {      position: absolute;      width: 3px;      height: 3px;      background: #9b8cff;      border-radius: 50%;      animation:         twinkle 4s infinite ease-in-out,         drift 12s infinite ease-in-out; }   @keyframes twinkle {      0%,     100% {          opacity: .1;          transform: scale(.7);     }      50% {          opacity: .8;          transform: scale(1.4);     } }   @keyframes drift {      0%,     100% {          margin-left: 0;          margin-top: 0;     }      50% {          margin-left: 12px;          margin-top: -15px;     } }   /* =====================================================    NAVBAR ===================================================== */  nav {      width: 90%;      max-width: 1500px;      margin: auto;      padding: 30px 0;      display: flex;      justify-content: space-between;      align-items: center; }   .logo {      font-size: 24px;      font-weight: 900;      letter-spacing: -1px; }   .logo span {      background:          linear-gradient(             90deg,             #f4efff,             #8b5cf6,             #67e8f9         );      -webkit-background-clip: text;      color: transparent; }   .nav-links {      display: flex;      align-items: center;      gap: 30px; }   .nav-links a {      color: #a5a0bd;      text-decoration: none;      font-size: 14px;      font-weight: 600;      transition: .3s; }   .nav-links a\:hover {      color: #a78bfa; }   .nav-button {      color: #080611 !important;      padding: 12px 20px;      border-radius: 12px;      background:          linear-gradient(             100deg,             #6d4aff,             #8b5cf6,             #67e8f9         );      box-shadow:         0 8px 30px         rgba(218,170,55,.16); }   /* =====================================================    HERO ===================================================== */  .hero {      width: 90%;      max-width: 1500px;      min-height:         calc(100vh - 80px);      margin: auto;      display: grid;      grid-template-columns:         1.05fr .95fr;      align-items: center;      gap: 40px; }   .hero-left {      position: relative;      z-index: 5; }   .badge {      display: inline-flex;      align-items: center;      gap: 9px;      padding: 13px 20px;      border-radius: 999px;      color: #b9a7ff;      font-weight: 800;      font-size: 13px;      letter-spacing: .5px;      background:         rgba(139,92,246,.09);      border:         1px solid         rgba(139,92,246,.35);      margin-bottom: 35px; }   .badge::before {      content: "✦";      color: #bdaeff;      text-shadow:         0 0 15px #8b5cf6; }   h1 {      font-size:         clamp(65px, 7vw, 115px);      line-height: .87;      letter-spacing: -7px;      font-weight: 900;      margin-bottom: 38px; }   .white {      color: #f7f5ff; }   .gradient {      background:          linear-gradient(             90deg,             #7047ff,             #8b5cf6,             #8be9ff,             #ec4899         );      -webkit-background-clip: text;      background-clip: text;      color: transparent; }   .hero-description {      max-width: 760px;      color: #aaa7bf;      font-size: 18px;      line-height: 1.9;      margin-bottom: 35px; }   .hero-description strong {      color: #b9a7ff; }   /* =====================================================    BUTTONS ===================================================== */  .buttons {      display: flex;      gap: 15px;      flex-wrap: wrap; }   .btn {      min-width: 210px;      padding: 19px 28px;      border-radius: 16px;      display: inline-flex;      align-items: center;      justify-content: center;      text-decoration: none;      font-weight: 800;      transition: .3s; }   .primary {      color: #080611;      background:          linear-gradient(             100deg,             #6d4aff,             #e4b849,             #67e8f9         );      box-shadow:         0 10px 45px         rgba(124,92,246,.22); }   .primary\:hover {      transform:         translateY(-5px);      box-shadow:         0 15px 60px         rgba(236,72,153,.25); }   .secondary {      color: #ebe8f7;      background:         rgba(255,255,255,.035);      border:         1px solid         rgba(255,255,255,.12); }   .secondary\:hover {      transform:         translateY(-5px);      border-color:         rgba(218,170,55,.4); }   /* =====================================================    HERO RIGHT ===================================================== */  .hero-right {      height: 620px;      position: relative;      display: flex;      align-items: center;      justify-content: center; }   .server-container {      width: 250px;      height: 250px;      position: relative;      display: flex;      align-items: center;      justify-content: center;      transition:         transform .15s ease-out; }   .server-glow {      position: absolute;      width: 400px;      height: 400px;      border-radius: 50%;      background:          radial-gradient(             circle,             rgba(218,170,55,.27),             transparent 65%         );      animation:         pulse 4s infinite ease-in-out; }   @keyframes pulse {      0%,     100% {          transform:             scale(.9);          opacity: .55;     }      50% {          transform:             scale(1.08);          opacity: 1;     } }   .server-ring {      position: absolute;      width: 310px;      height: 310px;      border-radius: 50%;      border:         1px solid         rgba(139,92,246,.30);      animation:         rotate 18s linear infinite; }   @keyframes rotate {      from {         transform:             rotate(0deg);     }      to {         transform:             rotate(360deg);     } }   .server-logo {      width: 165px;      height: 165px;      border-radius: 35px;      overflow: hidden;      position: relative;      background: #090805;      border:         1px solid         rgba(139,92,246,.45);      box-shadow:          0 0 70px         rgba(34,211,238,.22); }   .server-logo img {      width: 100%;      height: 100%;      object-fit: cover; }   /* =====================================================    FLOATING BUBBLES ===================================================== */  .feature {      position: absolute;      padding: 14px 20px;      border-radius: 999px;      display: flex;      align-items: center;      gap: 9px;      background:         rgba(10,9,6,.82);      border:         1px solid         rgba(139,92,246,.25);      color: #eee7d7;      font-size: 14px;      font-weight: 700;      backdrop-filter:         blur(15px);      box-shadow:         0 15px 45px         rgba(0,0,0,.4);      animation:         float 5s ease-in-out infinite; }   .feature::before {      content: "";      width: 7px;      height: 7px;      border-radius: 50%;      background: #67e8f9;      box-shadow:         0 0 12px #67e8f9; }   .feature.one {      top: 8%;      right: 2%; }   .feature.two {      top: 25%;      left: 0;      animation-delay: 1s; }   .feature.three {      bottom: 29%;      left: 2%;      animation-delay: 2s; }   .feature.four {      bottom: 12%;      right: 2%;      animation-delay: 3s; }   .feature.five {      top: 48%;      right: -5%;      animation-delay: 1.5s; }   @keyframes float {      0%,     100% {          transform:             translateY(0);     }      50% {          transform:             translateY(-20px);     } }   /* =====================================================    GENERAL SECTION ===================================================== */  .section {      width: 90%;      max-width: 1300px;      margin:         130px auto; }   .section-heading {      text-align: center;      margin-bottom: 55px; }   .section-heading h2 {      font-size: 48px;      font-weight: 900;      margin-bottom: 15px; }   .section-heading h2 span {      background:          linear-gradient(             90deg,             #8b5cf6,             #67e8f9,             #8b5cf6         );      -webkit-background-clip: text;      color: transparent; }   .section-heading p {      color: #827b6e;      font-size: 16px; }   /* =====================================================    ABOUT ===================================================== */  .about-grid {      display: grid;      grid-template-columns:         1.2fr .8fr;      gap: 25px; }   .about-card {      padding: 40px;      border-radius: 25px;      background:          linear-gradient(             145deg,             rgba(255,255,255,.045),             rgba(255,255,255,.012)         );      border:         1px solid         rgba(139,92,246,.14);      transition: .3s; }   .about-card\:hover {      transform:         translateY(-6px);      border-color:         rgba(139,92,246,.35); }   .about-card h3 {      color: #b9a7ff;      font-size: 24px;      margin-bottom: 18px; }   .about-card p {      color: #918a7b;      line-height: 1.9;      font-size: 15px; }   .about-highlight {      display: flex;      flex-direction: column;      justify-content: center;      gap: 18px; }   .highlight {      padding: 20px;      border-radius: 17px;      background:         rgba(139,92,246,.05);      border:         1px solid         rgba(139,92,246,.12); }   .highlight strong {      display: block;      color: #a78bfa;      font-size: 17px;      margin-bottom: 5px; }   .highlight span {      color: #756f64;      font-size: 13px; }   /* =====================================================    DO'S AND DON'TS ===================================================== */  .rules-grid {      display: grid;      grid-template-columns:         1fr 1fr;      gap: 25px; }   .rules-card {      padding: 40px;      border-radius: 25px;      background:         rgba(255,255,255,.025);      border:         1px solid         rgba(255,255,255,.07); }   .rules-card.do {      border-color:         rgba(75,190,120,.20); }   .rules-card.dont {      border-color:         rgba(210,75,75,.20); }   .rules-title {      display: flex;      align-items: center;      gap: 13px;      margin-bottom: 30px; }   .rules-icon {      width: 45px;      height: 45px;      display: flex;      align-items: center;      justify-content: center;      border-radius: 13px;      font-size: 20px; }   .do .rules-icon {      background:         rgba(70,190,115,.10);      border:         1px solid         rgba(70,190,115,.25); }   .dont .rules-icon {      background:         rgba(210,75,75,.10);      border:         1px solid         rgba(210,75,75,.25); }   .rules-title h3 {      font-size: 25px; }   .do .rules-title h3 {      color: #77d69b; }   .dont .rules-title h3 {      color: #e47c7c; }   .rule {      display: flex;      gap: 13px;      padding: 14px 0;      border-bottom:         1px solid         rgba(255,255,255,.045);      color: #928b7c;      line-height: 1.6;      font-size: 14px; }   .rule\:last-child {      border-bottom: none; }   .rule-symbol {      font-weight: 900;      flex-shrink: 0; }   .do .rule-symbol {      color: #6bd394; }   .dont .rule-symbol {      color: #dc6e6e; }   /* =====================================================    OWNERS ===================================================== */  .owner-grid {      display: grid;      grid-template-columns:         repeat(4, 1fr);      gap: 20px; }   .owner-card {      padding: 32px 22px;      text-align: center;      border-radius: 23px;      background:          linear-gradient(             145deg,             rgba(255,255,255,.045),             rgba(255,255,255,.012)         );      border:         1px solid         rgba(139,92,246,.16);      transition: .35s;      position: relative;      overflow: hidden; }   .owner-card\:hover {      transform:         translateY(-10px);      border-color:         rgba(139,92,246,.45);      box-shadow:         0 20px 60px         rgba(34,211,238,.09); }   .owner-image {      width: 100px;      height: 100px;      margin:         0 auto 20px;      padding: 3px;      border-radius: 50%;      background:          linear-gradient(             135deg,             #ffe49a,             #6d4aff,             #ffe49a         ); }   .owner-image img {      width: 100%;      height: 100%;      object-fit: cover;      border-radius: 50%;      display: block;      background: #080705; }   .owner-card h3 {      font-size: 20px;      margin-bottom: 8px; }   .owner-role {      display: inline-block;      color: #a78bfa;      font-size: 11px;      font-weight: 800;      letter-spacing: 1px;      text-transform: uppercase;      margin-bottom: 14px; }   .owner-description {      color: #85819e;      font-size: 13px;      line-height: 1.7; }   .owner-description strong {      color: #a78bfa; }   /* =====================================================    BOT OWNER ===================================================== */  .bot-owner {      margin-top: 90px;      padding-top: 70px;      border-top:         1px solid         rgba(139,92,246,.10);      text-align: center; }   .bot-card {      width:         min(430px, 100%);      margin: auto;      padding: 40px 30px;      border-radius: 26px;      background:          linear-gradient(             145deg,             rgba(34,211,238,.09),             rgba(255,255,255,.015)         );      border:         1px solid         rgba(218,170,55,.30);      box-shadow:         0 20px 70px         rgba(34,211,238,.09);      transition: .35s; }   .bot-card\:hover {      transform:         translateY(-10px);      box-shadow:         0 25px 80px         rgba(139,92,246,.16); }   /* =====================================================    FINAL CTA ===================================================== */  .cta {      width: 90%;      max-width: 1100px;      margin:         150px auto;      padding:         70px 40px;      text-align: center;      border-radius: 30px;      background:          radial-gradient(             circle at center,             rgba(139,92,246,.12),             transparent 65%         ),          rgba(255,255,255,.025);      border:         1px solid         rgba(139,92,246,.18); }   .cta h2 {      font-size: 48px;      font-weight: 900;      margin-bottom: 15px; }   .cta h2 span {      background:          linear-gradient(             90deg,             #8b5cf6,             #67e8f9         );      -webkit-background-clip: text;      color: transparent; }   .cta p {      color: #85819e;      max-width: 650px;      margin:         0 auto 30px;      line-height: 1.8; }   /* =====================================================    FOOTER ===================================================== */  footer {      width: 90%;      max-width: 1400px;      margin: auto;      padding:         30px 0 50px;      border-top:         1px solid         rgba(255,255,255,.06);      text-align: center;      color: #68627f;      font-size: 13px; }   footer span {      color: #8b5cf6; }   /* =====================================================    RESPONSIVE ===================================================== */  @media (max-width: 1050px) {      .hero {          grid-template-columns: 1fr;          padding-top: 50px;     }       .hero-right {          height: 550px;     }       .about-grid {          grid-template-columns: 1fr;     }       .owner-grid {          grid-template-columns:             repeat(2, 1fr);     } }   @media (max-width: 700px) {      nav {          padding:             22px 0;     }       .nav-links a\:not(.nav-button) {          display: none;     }       h1 {          font-size: 55px;          letter-spacing: -4px;     }       .hero-description {          font-size: 16px;     }       .hero-right {          height: 470px;          transform:             scale(.78);     }       .rules-grid {          grid-template-columns: 1fr;     }       .owner-grid {          grid-template-columns: 1fr;     }       .section-heading h2,     .cta h2 {          font-size: 35px;     }       .about-card,     .rules-card {          padding: 28px 22px;     }       .cta {          padding:             50px 25px;     }       .btn {          width: 100%;     }  }  </style>
+<style>
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#050511;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   PYSARA-STYLE BACKGROUND
+   ONLY BACKGROUND + GLOW CHANGED
+===================================================== */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-20;
+
+    background:
+        radial-gradient(
+            circle at 75% 25%,
+            rgba(124,77,255,.14),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 15% 82%,
+            rgba(0,191,255,.09),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(92,55,180,.045),
+            transparent 55%
+        ),
+        linear-gradient(
+            135deg,
+            #050511 0%,
+            #0a0918 45%,
+            #090719 70%,
+            #05050f 100%
+        );
+}
+
+.glow{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(140px);
+    pointer-events:none;
+    z-index:-15;
+}
+
+.glow.one{
+    width:650px;
+    height:650px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(124,77,255,.20) 0%,
+            rgba(124,77,255,.09) 35%,
+            transparent 72%
+        );
+
+    top:-18%;
+    right:-10%;
+}
+
+.glow.two{
+    width:600px;
+    height:600px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,191,255,.13) 0%,
+            rgba(0,150,255,.055) 35%,
+            transparent 72%
+        );
+
+    bottom:-15%;
+    left:-12%;
+}
+
+.background::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 65% 45%,
+            rgba(124,77,255,.055),
+            transparent 32%
+        );
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-10;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:rgba(255,255,255,.35);
+    border-radius:50%;
+
+    animation:
+        twinkle 4s infinite ease-in-out,
+        drift 12s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.1;
+        transform:scale(.7);
+    }
+
+    50%{
+        opacity:.8;
+        transform:scale(1.4);
+    }
+}
+
+@keyframes drift{
+    0%,100%{
+        margin-left:0;
+        margin-top:0;
+    }
+
+    50%{
+        margin-left:12px;
+        margin-top:-15px;
+    }
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav{
+    width:90%;
+    max-width:1500px;
+    margin:auto;
+    padding:30px 0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #b99aff,
+            #70d8ff
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.nav-links a{
+    color:#a9a5bb;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#a987ff;
+}
+
+.nav-button{
+    color:#09070f !important;
+    padding:12px 20px;
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #7040ff,
+            #9d68ff,
+            #69dfff
+        );
+
+    box-shadow:
+        0 8px 30px
+        rgba(124,77,255,.22);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    width:90%;
+    max-width:1500px;
+
+    min-height:calc(100vh - 80px);
+
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+
+    align-items:center;
+    gap:40px;
+}
+
+.hero-left{
+    position:relative;
+    z-index:5;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:13px 20px;
+    border-radius:999px;
+
+    color:#b9a2ff;
+
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.5px;
+
+    background:
+        rgba(124,77,255,.07);
+
+    border:
+        1px solid
+        rgba(124,77,255,.35);
+
+    margin-bottom:35px;
+}
+
+.badge::before{
+    content:"✦";
+    color:#bda8ff;
+
+    text-shadow:
+        0 0 15px #8b5cff;
+}
+
+h1{
+    font-size:clamp(65px,7vw,115px);
+    line-height:.87;
+    letter-spacing:-7px;
+    font-weight:900;
+    margin-bottom:38px;
+}
+
+.white{
+    color:#f8f7ff;
+}
+
+.gradient{
+    background:
+        linear-gradient(
+            90deg,
+            #7040ff,
+            #8f63ff,
+            #69dfff,
+            #e98ad1
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero-description{
+    max-width:760px;
+    color:#aaa8ba;
+    font-size:18px;
+    line-height:1.9;
+    margin-bottom:35px;
+}
+
+.hero-description strong{
+    color:#b69aff;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    min-width:210px;
+    padding:19px 28px;
+
+    border-radius:16px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+    font-weight:800;
+
+    transition:.3s;
+}
+
+.primary{
+    color:#09070f;
+
+    background:
+        linear-gradient(
+            100deg,
+            #7040ff,
+            #9b65ff,
+            #6edfff
+        );
+
+    box-shadow:
+        0 10px 45px
+        rgba(124,77,255,.20);
+}
+
+.primary:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 15px 60px
+        rgba(124,77,255,.35);
+}
+
+.secondary{
+    color:#e9e7f2;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+}
+
+.secondary:hover{
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(124,77,255,.4);
+}
+
+
+/* =====================================================
+   HERO RIGHT
+===================================================== */
+
+.hero-right{
+    height:620px;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.server-container{
+    width:250px;
+    height:250px;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:
+        transform .15s ease-out;
+}
+
+.server-glow{
+    position:absolute;
+
+    width:400px;
+    height:400px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(124,77,255,.27),
+            rgba(0,191,255,.08),
+            transparent 65%
+        );
+
+    animation:
+        pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(.9);
+        opacity:.55;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.server-ring{
+    position:absolute;
+
+    width:310px;
+    height:310px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(124,77,255,.3);
+
+    animation:
+        rotate 18s linear infinite;
+}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.server-logo{
+    width:165px;
+    height:165px;
+
+    border-radius:35px;
+    overflow:hidden;
+
+    position:relative;
+
+    background:#090814;
+
+    border:
+        1px solid
+        rgba(124,77,255,.45);
+
+    box-shadow:
+        0 0 70px
+        rgba(124,77,255,.25);
+}
+
+.server-logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+
+/* =====================================================
+   FLOATING BUBBLES
+===================================================== */
+
+.feature{
+    position:absolute;
+
+    padding:14px 20px;
+    border-radius:999px;
+
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    background:
+        rgba(9,8,20,.82);
+
+    border:
+        1px solid
+        rgba(124,77,255,.25);
+
+    color:#eeeafa;
+
+    font-size:14px;
+    font-weight:700;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.4);
+
+    animation:
+        float 5s ease-in-out infinite;
+}
+
+.feature::before{
+    content:"";
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#8d62ff;
+
+    box-shadow:
+        0 0 12px #8d62ff;
+}
+
+.feature.one{
+    top:8%;
+    right:2%;
+}
+
+.feature.two{
+    top:25%;
+    left:0;
+    animation-delay:1s;
+}
+
+.feature.three{
+    bottom:29%;
+    left:2%;
+    animation-delay:2s;
+}
+
+.feature.four{
+    bottom:12%;
+    right:2%;
+    animation-delay:3s;
+}
+
+.feature.five{
+    top:48%;
+    right:-5%;
+    animation-delay:1.5s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+}
+
+
+/* =====================================================
+   GENERAL SECTION
+===================================================== */
+
+.section{
+    width:90%;
+    max-width:1300px;
+    margin:130px auto;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-heading h2{
+    font-size:48px;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.section-heading h2 span{
+    background:
+        linear-gradient(
+            90deg,
+            #7040ff,
+            #a078ff,
+            #69dfff
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.section-heading p{
+    color:#827f91;
+    font-size:16px;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:25px;
+}
+
+.about-card{
+    padding:40px;
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    border:
+        1px solid
+        rgba(124,77,255,.14);
+
+    transition:.3s;
+}
+
+.about-card:hover{
+    transform:translateY(-6px);
+
+    border-color:
+        rgba(124,77,255,.35);
+}
+
+.about-card h3{
+    color:#b79cff;
+    font-size:24px;
+    margin-bottom:18px;
+}
+
+.about-card p{
+    color:#918e9f;
+    line-height:1.9;
+    font-size:15px;
+}
+
+.about-highlight{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:18px;
+}
+
+.highlight{
+    padding:20px;
+    border-radius:17px;
+
+    background:
+        rgba(124,77,255,.045);
+
+    border:
+        1px solid
+        rgba(124,77,255,.12);
+}
+
+.highlight strong{
+    display:block;
+    color:#a98bff;
+    font-size:17px;
+    margin-bottom:5px;
+}
+
+.highlight span{
+    color:#756f80;
+    font-size:13px;
+}
+
+
+/* =====================================================
+   DO'S AND DON'TS
+===================================================== */
+
+.rules-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.rules-card{
+    padding:40px;
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.rules-card.do{
+    border-color:
+        rgba(75,190,120,.20);
+}
+
+.rules-card.dont{
+    border-color:
+        rgba(210,75,75,.20);
+}
+
+.rules-title{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-bottom:30px;
+}
+
+.rules-icon{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+    font-size:20px;
+}
+
+.do .rules-icon{
+    background:
+        rgba(70,190,115,.10);
+
+    border:
+        1px solid
+        rgba(70,190,115,.25);
+}
+
+.dont .rules-icon{
+    background:
+        rgba(210,75,75,.10);
+
+    border:
+        1px solid
+        rgba(210,75,75,.25);
+}
+
+.rules-title h3{
+    font-size:25px;
+}
+
+.do .rules-title h3{
+    color:#77d69b;
+}
+
+.dont .rules-title h3{
+    color:#e47c7c;
+}
+
+.rule{
+    display:flex;
+    gap:13px;
+
+    padding:14px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.045);
+
+    color:#928b9c;
+
+    line-height:1.6;
+    font-size:14px;
+}
+
+.rule:last-child{
+    border-bottom:none;
+}
+
+.rule-symbol{
+    font-weight:900;
+    flex-shrink:0;
+}
+
+.do .rule-symbol{
+    color:#6bd394;
+}
+
+.dont .rule-symbol{
+    color:#dc6e6e;
+}
+
+
+/* =====================================================
+   OWNERS
+===================================================== */
+
+.owner-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.owner-card{
+    padding:32px 22px;
+    text-align:center;
+
+    border-radius:23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    border:
+        1px solid
+        rgba(124,77,255,.15);
+
+    transition:.35s;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.owner-card:hover{
+    transform:translateY(-10px);
+
+    border-color:
+        rgba(124,77,255,.45);
+
+    box-shadow:
+        0 20px 60px
+        rgba(124,77,255,.09);
+}
+
+.owner-image{
+    width:100px;
+    height:100px;
+
+    margin:0 auto 20px;
+    padding:3px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a984ff,
+            #7040ff,
+            #6edfff
+        );
+}
+
+.owner-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    border-radius:50%;
+    display:block;
+
+    background:#08070f;
+}
+
+.owner-card h3{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.owner-role{
+    display:inline-block;
+
+    color:#a889ff;
+
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    margin-bottom:14px;
+}
+
+.owner-description{
+    color:#817d8e;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.owner-description strong{
+    color:#a889ff;
+}
+
+
+/* =====================================================
+   BOT OWNER
+===================================================== */
+
+.bot-owner{
+    margin-top:90px;
+    padding-top:70px;
+
+    border-top:
+        1px solid
+        rgba(124,77,255,.10);
+
+    text-align:center;
+}
+
+.bot-card{
+    width:min(430px,100%);
+    margin:auto;
+
+    padding:40px 30px;
+    border-radius:26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(124,77,255,.08),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid
+        rgba(124,77,255,.30);
+
+    box-shadow:
+        0 20px 70px
+        rgba(124,77,255,.08);
+
+    transition:.35s;
+}
+
+.bot-card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:
+        0 25px 80px
+        rgba(124,77,255,.15);
+}
+
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.cta{
+    width:90%;
+    max-width:1100px;
+
+    margin:150px auto;
+
+    padding:70px 40px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(124,77,255,.12),
+            transparent 65%
+        ),
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(124,77,255,.18);
+}
+
+.cta h2{
+    font-size:48px;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.cta h2 span{
+    background:
+        linear-gradient(
+            90deg,
+            #7040ff,
+            #69dfff
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.cta p{
+    color:#817d8e;
+
+    max-width:650px;
+    margin:0 auto 30px;
+
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    width:90%;
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:30px 0 50px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
+    text-align:center;
+
+    color:#625e6f;
+    font-size:13px;
+}
+
+footer span{
+    color:#9c7cff;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1050px){
+
+    .hero{
+        grid-template-columns:1fr;
+        padding-top:50px;
+    }
+
+    .hero-right{
+        height:550px;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .owner-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    nav{
+        padding:22px 0;
+    }
+
+    .nav-links a:not(.nav-button){
+        display:none;
+    }
+
+    h1{
+        font-size:55px;
+        letter-spacing:-4px;
+    }
+
+    .hero-description{
+        font-size:16px;
+    }
+
+    .hero-right{
+        height:470px;
+        transform:scale(.78);
+    }
+
+    .rules-grid{
+        grid-template-columns:1fr;
+    }
+
+    .owner-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-heading h2,
+    .cta h2{
+        font-size:35px;
+    }
+
+    .about-card,
+    .rules-card{
+        padding:28px 22px;
+    }
+
+    .cta{
+        padding:50px 25px;
+    }
+
+    .btn{
+        width:100%;
+    }
+}
+
+</style>
 </head>
+
 
 <body>
 
-<!-- =====================================================      BACKGROUND ===================================================== -->
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
 <div class="background"></div>
 
 <div class="glow one"></div>
-
 <div class="glow two"></div>
 
-<div     class="stars"     id="stars" ></div>
+<div class="stars" id="stars"></div>
 
-<!-- =====================================================      NAVIGATION ===================================================== -->
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
 <nav>
 
-```
-<div class="logo">
-
-    <span>LUREX</span>
-    KINGDOM
-
-</div>
-
-
-<div class="nav-links">
-
-    <a href="#about">
-        About
-    </a>
-
-    <a href="#rules">
-        Rules
-    </a>
-
-    <a href="#owners">
-        Owners
-    </a>
-
-    <a
-        href="https://discord.gg/T2HymyvKr"
-        target="_blank"
-        class="nav-button"
-    >
-        Join Discord
-    </a>
-
-</div>
-```
-
-</nav>
-
-<!-- =====================================================      HERO ===================================================== -->
-
-<section class="hero">
-
-```
-<div class="hero-left">
-
-
-    <div class="badge">
-
-        LUREX KINGDOM COMMUNITY
-
+    <div class="logo">
+        <span>LUREX</span>
+        KINGDOM
     </div>
 
+    <div class="nav-links">
 
-    <h1>
+        <a href="#about">
+            About
+        </a>
 
-        <span class="white">
-            More Than
-        </span>
+        <a href="#rules">
+            Rules
+        </a>
 
-        <br>
-
-        <span class="gradient">
-            Just A Server
-        </span>
-
-        <br>
-
-        <span class="white">
-            It's A Kingdom.
-        </span>
-
-    </h1>
-
-
-    <p class="hero-description">
-
-        <strong>Lurex Kingdom</strong> is a growing
-        Discord community built for people who want
-        something more than an ordinary server.
-
-        <br><br>
-
-        Hang out with the community, meet new people,
-        play <strong>Roblox and other games</strong>,
-        participate in events, enter giveaways,
-        compete in activities, and enjoy a welcoming
-        environment where everyone can find their place.
-
-        <br><br>
-
-        Whether you're here to game, socialize,
-        compete, or simply chill, your place in
-        <strong>Lurex Kingdom</strong> is waiting.
-
-    </p>
-
-
-    <div class="buttons">
+        <a href="#owners">
+            Owners
+        </a>
 
         <a
             href="https://discord.gg/T2HymyvKr"
             target="_blank"
-            class="btn primary"
+            class="nav-button"
         >
-
-            ✦ Join Lurex Kingdom
-
-        </a>
-
-
-        <a
-            href="#about"
-            class="btn secondary"
-        >
-
-            Explore Kingdom
-
+            Join Discord
         </a>
 
     </div>
 
-
-</div>
-
-
-<!-- =================================================
-     RIGHT HERO
-================================================= -->
-
-<div class="hero-right">
+</nav>
 
 
-    <div class="feature one">
-        🎉 Giveaways
-    </div>
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <div class="badge">
+            LUREX KINGDOM COMMUNITY
+        </div>
+
+        <h1>
+
+            <span class="white">
+                More Than
+            </span>
+
+            <br>
+
+            <span class="gradient">
+                Just A Server
+            </span>
+
+            <br>
+
+            <span class="white">
+                It's A Kingdom.
+            </span>
+
+        </h1>
 
 
-    <div class="feature two">
-        🎮 Roblox
-    </div>
+        <p class="hero-description">
+
+            <strong>Lurex Kingdom</strong> is a growing
+            Discord community built for people who want
+            something more than an ordinary server.
+
+            <br><br>
+
+            Hang out with the community, meet new people,
+            play <strong>Roblox and other games</strong>,
+            participate in events, enter giveaways,
+            compete in activities, and enjoy a welcoming
+            environment where everyone can find their place.
+
+            <br><br>
+
+            Whether you're here to game, socialize,
+            compete, or simply chill, your place in
+            <strong>Lurex Kingdom</strong> is waiting.
+
+        </p>
 
 
-    <div class="feature three">
-        🏆 Competitions
-    </div>
+        <div class="buttons">
 
-
-    <div class="feature four">
-        🛡️ Security
-    </div>
-
-
-    <div class="feature five">
-        ⚡ Events
-    </div>
-
-
-    <div
-        class="server-container"
-        id="server"
-    >
-
-        <div class="server-glow"></div>
-
-        <div class="server-ring"></div>
-
-        <div class="server-logo">
-
-            <img
-                src="lurex-logo.png"
-                alt="Lurex Kingdom"
+            <a
+                href="https://discord.gg/T2HymyvKr"
+                target="_blank"
+                class="btn primary"
             >
+                ✦ Join Lurex Kingdom
+            </a>
+
+            <a
+                href="#about"
+                class="btn secondary"
+            >
+                Explore Kingdom
+            </a>
 
         </div>
 
     </div>
 
-</div>
-```
+
+    <!-- =================================================
+         RIGHT HERO
+    ================================================= -->
+
+    <div class="hero-right">
+
+        <div class="feature one">
+            🎉 Giveaways
+        </div>
+
+        <div class="feature two">
+            🎮 Roblox
+        </div>
+
+        <div class="feature three">
+            🏆 Competitions
+        </div>
+
+        <div class="feature four">
+            🛡️ Security
+        </div>
+
+        <div class="feature five">
+            ⚡ Events
+        </div>
+
+
+        <div
+            class="server-container"
+            id="server"
+        >
+
+            <div class="server-glow"></div>
+
+            <div class="server-ring"></div>
+
+            <div class="server-logo">
+
+                <img
+                    src="lurex-logo.png"
+                    alt="Lurex Kingdom"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- =====================================================      ABOUT ===================================================== -->
 
-<section     class="section"     id="about" >
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
-```
-<div class="section-heading">
+<section
+    class="section"
+    id="about"
+>
 
-    <h2>
+    <div class="section-heading">
 
-        Welcome To
+        <h2>
 
-        <span>
-            Lurex Kingdom
-        </span>
+            Welcome To
 
-    </h2>
+            <span>
+                Lurex Kingdom
+            </span>
 
-    <p>
-        A community built by its members,
-        for its members.
-    </p>
-
-</div>
-
-
-<div class="about-grid">
-
-
-    <div class="about-card">
-
-        <h3>
-            👑 What Is Lurex Kingdom?
-        </h3>
+        </h2>
 
         <p>
-
-            Lurex Kingdom is a community-focused
-            Discord server created to bring people
-            together through gaming, Roblox,
-            entertainment, events, giveaways,
-            conversations, and friendships.
-
-            <br><br>
-
-            Our goal is to create a place where
-            members can have fun, meet new people,
-            participate in activities, and feel like
-            they are genuinely part of a community.
-
-            <br><br>
-
-            The Kingdom is constantly evolving,
-            with new ideas, events, features,
-            and opportunities being introduced
-            as the community grows.
-
+            A community built by its members,
+            for its members.
         </p>
 
     </div>
 
 
-    <div class="about-highlight">
+    <div class="about-grid">
 
+        <div class="about-card">
 
-        <div class="highlight">
+            <h3>
+                👑 What Is Lurex Kingdom?
+            </h3>
 
-            <strong>
-                🎮 Gaming
-            </strong>
+            <p>
 
-            <span>
-                Roblox, games and gaming-related
-                community activities.
-            </span>
+                Lurex Kingdom is a community-focused
+                Discord server created to bring people
+                together through gaming, Roblox,
+                entertainment, events, giveaways,
+                conversations, and friendships.
 
-        </div>
+                <br><br>
 
+                Our goal is to create a place where
+                members can have fun, meet new people,
+                participate in activities, and feel like
+                they are genuinely part of a community.
 
-        <div class="highlight">
+                <br><br>
 
-            <strong>
-                🎁 Giveaways
-            </strong>
+                The Kingdom is constantly evolving,
+                with new ideas, events, features,
+                and opportunities being introduced
+                as the community grows.
 
-            <span>
-                Community giveaways and special
-                rewards.
-            </span>
-
-        </div>
-
-
-        <div class="highlight">
-
-            <strong>
-                ⚡ Events
-            </strong>
-
-            <span>
-                Competitions, activities and
-                community events.
-            </span>
+            </p>
 
         </div>
 
 
-        <div class="highlight">
+        <div class="about-highlight">
 
-            <strong>
-                👥 Community
-            </strong>
+            <div class="highlight">
 
-            <span>
-                Meet people, make friends and
-                enjoy the Kingdom.
-            </span>
+                <strong>
+                    🎮 Gaming
+                </strong>
+
+                <span>
+                    Roblox, games and gaming-related
+                    community activities.
+                </span>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <strong>
+                    🎁 Giveaways
+                </strong>
+
+                <span>
+                    Community giveaways and special
+                    rewards.
+                </span>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <strong>
+                    ⚡ Events
+                </strong>
+
+                <span>
+                    Competitions, activities and
+                    community events.
+                </span>
+
+            </div>
+
+
+            <div class="highlight">
+
+                <strong>
+                    👥 Community
+                </strong>
+
+                <span>
+                    Meet people, make friends and
+                    enjoy the Kingdom.
+                </span>
+
+            </div>
 
         </div>
-
 
     </div>
-
-</div>
-```
 
 </section>
 
-<!-- =====================================================      DO'S AND DON'TS ===================================================== -->
 
-<section     class="section"     id="rules" >
+<!-- =====================================================
+     DO'S AND DON'TS
+===================================================== -->
 
-```
-<div class="section-heading">
+<section
+    class="section"
+    id="rules"
+>
 
-    <h2>
+    <div class="section-heading">
 
-        Kingdom
+        <h2>
 
-        <span>
-            Guidelines
-        </span>
+            Kingdom
 
-    </h2>
-
-    <p>
-        Keep Lurex Kingdom enjoyable,
-        welcoming and safe for everyone.
-    </p>
-
-</div>
-
-
-<div class="rules-grid">
-
-
-    <!-- DO -->
-
-    <div class="rules-card do">
-
-
-        <div class="rules-title">
-
-            <div class="rules-icon">
-                ✓
-            </div>
-
-            <h3>
-                Things To Do
-            </h3>
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✓
+            <span>
+                Guidelines
             </span>
 
-            Respect other members and
-            treat everyone fairly.
+        </h2>
 
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✓
-            </span>
-
-            Participate in conversations,
-            events and community activities.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✓
-            </span>
-
-            Follow the instructions given
-            by the moderation team.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✓
-            </span>
-
-            Use the correct channels for
-            their intended purposes.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✓
-            </span>
-
-            Report problems or rule violations
-            to the appropriate staff members.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✓
-            </span>
-
-            Help keep the community welcoming
-            and enjoyable for everyone.
-
-        </div>
-
+        <p>
+            Keep Lurex Kingdom enjoyable,
+            welcoming and safe for everyone.
+        </p>
 
     </div>
 
 
-    <!-- DON'T -->
-
-    <div class="rules-card dont">
+    <div class="rules-grid">
 
 
-        <div class="rules-title">
+        <!-- DO -->
 
-            <div class="rules-icon">
-                ✕
+        <div class="rules-card do">
+
+            <div class="rules-title">
+
+                <div class="rules-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    Things To Do
+                </h3>
+
             </div>
 
-            <h3>
-                Things To Avoid
-            </h3>
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✓
+                </span>
+
+                Respect other members and
+                treat everyone fairly.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✓
+                </span>
+
+                Participate in conversations,
+                events and community activities.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✓
+                </span>
+
+                Follow the instructions given
+                by the moderation team.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✓
+                </span>
+
+                Use the correct channels for
+                their intended purposes.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✓
+                </span>
+
+                Report problems or rule violations
+                to the appropriate staff members.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✓
+                </span>
+
+                Help keep the community welcoming
+                and enjoyable for everyone.
+
+            </div>
 
         </div>
 
 
-        <div class="rule">
+        <!-- DON'T -->
 
-            <span class="rule-symbol">
-                ✕
-            </span>
+        <div class="rules-card dont">
 
-            Do not harass, threaten,
-            bully or target other members.
+            <div class="rules-title">
+
+                <div class="rules-icon">
+                    ✕
+                </div>
+
+                <h3>
+                    Things To Avoid
+                </h3>
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✕
+                </span>
+
+                Do not harass, threaten,
+                bully or target other members.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✕
+                </span>
+
+                Do not spam messages, mentions,
+                emojis or unnecessary content.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✕
+                </span>
+
+                Do not advertise without
+                permission from the staff team.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✕
+                </span>
+
+                Do not attempt to scam, deceive
+                or exploit other members.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✕
+                </span>
+
+                Do not intentionally disrupt
+                events or community activities.
+
+            </div>
+
+
+            <div class="rule">
+
+                <span class="rule-symbol">
+                    ✕
+                </span>
+
+                Do not abuse bots, permissions,
+                channels or server features.
+
+            </div>
 
         </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✕
-            </span>
-
-            Do not spam messages, mentions,
-            emojis or unnecessary content.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✕
-            </span>
-
-            Do not advertise without
-            permission from the staff team.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✕
-            </span>
-
-            Do not attempt to scam, deceive
-            or exploit other members.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✕
-            </span>
-
-            Do not intentionally disrupt
-            events or community activities.
-
-        </div>
-
-
-        <div class="rule">
-
-            <span class="rule-symbol">
-                ✕
-            </span>
-
-            Do not abuse bots, permissions,
-            channels or server features.
-
-        </div>
-
 
     </div>
-
-
-</div>
-```
 
 </section>
 
-<!-- =====================================================      OWNERS ===================================================== -->
 
-<section     class="section"     id="owners" >
-
-```
-<div class="section-heading">
-
-    <h2>
-
-        Meet The
-
-        <span>
-            Owners
-        </span>
-
-    </h2>
-
-    <p>
-        The team behind Lurex Kingdom.
-    </p>
-
-</div>
-
-
-<div class="owner-grid">
-
-
-    <!-- MEOWLY -->
-
-    <div class="owner-card">
-
-
-        <div class="owner-image">
-
-            <img
-                src="meowly.png"
-                alt="Meowly"
-            >
-
-        </div>
-
-
-        <h3>
-            Meowly
-        </h3>
-
-
-        <div class="owner-role">
-            Owner
-        </div>
-
-
-        <p class="owner-description">
-
-            One of the owners behind
-            Lurex Kingdom, helping lead
-            the community and shape its
-            future.
-
-        </p>
-
-
-    </div>
-
-
-    <!-- SKYLAR -->
-
-    <div class="owner-card">
-
-
-        <div class="owner-image">
-
-            <img
-                src="skylar.png"
-                alt="Skylar"
-            >
-
-        </div>
-
-
-        <h3>
-            Skylar
-        </h3>
-
-
-        <div class="owner-role">
-            Owner
-        </div>
-
-
-        <p class="owner-description">
-
-            Owner of Lurex Kingdom and
-            the <strong>Lurex Roblox Game
-            Developer</strong>, helping
-            develop and build the Lurex
-            gaming experience.
-
-        </p>
-
-
-    </div>
-
-
-    <!-- CHEETOZ -->
-
-    <div class="owner-card">
-
-
-        <div class="owner-image">
-
-            <img
-                src="cheetoz.png"
-                alt="Cheetoz"
-            >
-
-        </div>
-
-
-        <h3>
-            Cheetoz
-        </h3>
-
-
-        <div class="owner-role">
-            Owner
-        </div>
-
-
-        <p class="owner-description">
-
-            One of the owners of
-            Lurex Kingdom, helping
-            manage the community and
-            contribute to its continued
-            growth.
-
-        </p>
-
-
-    </div>
-
-
-    <!-- DOMINICK -->
-
-    <div class="owner-card">
-
-
-        <div class="owner-image">
-
-            <img
-                src="dominick_2.png"
-                alt="Dominick_2"
-            >
-
-        </div>
-
-
-        <h3>
-            Dominick_2
-        </h3>
-
-
-        <div class="owner-role">
-            Owner
-        </div>
-
-
-        <p class="owner-description">
-
-            One of the owners behind
-            Lurex Kingdom, helping
-            manage the server and create
-            a better experience for
-            its members.
-
-        </p>
-
-
-    </div>
-
-
-</div>
-
-
-<!-- =================================================
-     BOT OWNER
-================================================= -->
-
-<div class="bot-owner">
-
+<!-- =====================================================
+     OWNERS
+===================================================== -->
+
+<section
+    class="section"
+    id="owners"
+>
 
     <div class="section-heading">
 
@@ -755,118 +1696,342 @@
             Meet The
 
             <span>
-                Bot Owner
+                Owners
             </span>
 
         </h2>
 
         <p>
-            The technology behind the Kingdom.
+            The team behind Lurex Kingdom.
         </p>
 
     </div>
 
 
-    <div class="bot-card">
+    <div class="owner-grid">
 
 
-        <div class="owner-image">
+        <!-- MEOWLY -->
 
-            <img
-                src="asm.png"
-                alt="ASM"
-            >
+        <div class="owner-card">
+
+            <div class="owner-image">
+
+                <img
+                    src="meowly.png"
+                    alt="Meowly"
+                >
+
+            </div>
+
+            <h3>
+                Meowly
+            </h3>
+
+            <div class="owner-role">
+                Owner
+            </div>
+
+            <p class="owner-description">
+
+                One of the owners behind
+                Lurex Kingdom, helping lead
+                the community and shape its
+                future.
+
+            </p>
 
         </div>
 
 
-        <h3>
-            ASM
-        </h3>
+        <!-- SKYLAR -->
 
+        <div class="owner-card">
 
-        <div class="owner-role">
-            Bot Owner
+            <div class="owner-image">
+
+                <img
+                    src="skylar.png"
+                    alt="Skylar"
+                >
+
+            </div>
+
+            <h3>
+                Skylar
+            </h3>
+
+            <div class="owner-role">
+                Owner
+            </div>
+
+            <p class="owner-description">
+
+                Owner of Lurex Kingdom and
+                the <strong>Lurex Roblox Game
+                Developer</strong>, helping
+                develop and build the Lurex
+                gaming experience.
+
+            </p>
+
         </div>
 
 
-        <p class="owner-description">
+        <!-- CHEETOZ -->
 
-            The owner behind the Lurex Kingdom
-            bot, responsible for developing
-            and maintaining the systems,
-            features and technology that
-            help power the community.
+        <div class="owner-card">
 
-        </p>
+            <div class="owner-image">
 
+                <img
+                    src="cheetoz.png"
+                    alt="Cheetoz"
+                >
+
+            </div>
+
+            <h3>
+                Cheetoz
+            </h3>
+
+            <div class="owner-role">
+                Owner
+            </div>
+
+            <p class="owner-description">
+
+                One of the owners of
+                Lurex Kingdom, helping
+                manage the community and
+                contribute to its continued
+                growth.
+
+            </p>
+
+        </div>
+
+
+        <!-- DOMINICK -->
+
+        <div class="owner-card">
+
+            <div class="owner-image">
+
+                <img
+                    src="dominick_2.png"
+                    alt="Dominick_2"
+                >
+
+            </div>
+
+            <h3>
+                Dominick_2
+            </h3>
+
+            <div class="owner-role">
+                Owner
+            </div>
+
+            <p class="owner-description">
+
+                One of the owners behind
+                Lurex Kingdom, helping
+                manage the server and create
+                a better experience for
+                its members.
+
+            </p>
+
+        </div>
 
     </div>
 
-</div>
-```
+
+    <!-- =================================================
+         BOT OWNER
+    ================================================= -->
+
+    <div class="bot-owner">
+
+        <div class="section-heading">
+
+            <h2>
+
+                Meet The
+
+                <span>
+                    Bot Owner
+                </span>
+
+            </h2>
+
+            <p>
+                The technology behind the Kingdom.
+            </p>
+
+        </div>
+
+
+        <div class="bot-card">
+
+            <div class="owner-image">
+
+                <img
+                    src="asm.png"
+                    alt="ASM"
+                >
+
+            </div>
+
+            <h3>
+                ASM
+            </h3>
+
+            <div class="owner-role">
+                Bot Owner
+            </div>
+
+            <p class="owner-description">
+
+                The owner behind the Lurex Kingdom
+                bot, responsible for developing
+                and maintaining the systems,
+                features and technology that
+                help power the community.
+
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- =====================================================      FINAL CTA ===================================================== -->
+
+<!-- =====================================================
+     FINAL CTA
+===================================================== -->
 
 <section class="cta">
 
-```
-<h2>
+    <h2>
 
-    Ready To Enter
+        Ready To Enter
 
-    <span>
-        The Kingdom?
-    </span>
+        <span>
+            The Kingdom?
+        </span>
 
-</h2>
-
-
-<p>
-
-    Join Lurex Kingdom today and become
-    part of a growing community built
-    around gaming, events, friendships
-    and unforgettable moments.
-
-</p>
+    </h2>
 
 
-<a
-    href="https://discord.gg/T2HymyvKr"
-    target="_blank"
-    class="btn primary"
->
+    <p>
 
-    ✦ Join Lurex Kingdom
+        Join Lurex Kingdom today and become
+        part of a growing community built
+        around gaming, events, friendships
+        and unforgettable moments.
 
-</a>
-```
+    </p>
+
+
+    <a
+        href="https://discord.gg/T2HymyvKr"
+        target="_blank"
+        class="btn primary"
+    >
+        ✦ Join Lurex Kingdom
+    </a>
 
 </section>
 
-<!-- =====================================================      FOOTER ===================================================== -->
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
-```
-© 2026
+    © 2026
 
-<span>
-    Lurex Kingdom
-</span>
+    <span>
+        Lurex Kingdom
+    </span>
 
-— All rights reserved.
-```
+    — All rights reserved.
 
 </footer>
 
-<!-- =====================================================      JAVASCRIPT ===================================================== -->
 
-<script>   /* =====================================================    GOLD PARTICLES ===================================================== */  const stars =     document.getElementById("stars");   for (     let i = 0;     i < 120;     i++ ) {      const star =         document.createElement("div");      star.classList.add("star");      star.style.left =         Math.random() * 100 + "%";      star.style.top =         Math.random() * 100 + "%";      star.style.animationDelay =         Math.random() * 5 + "s";      stars.appendChild(star); }   /* =====================================================    CENTER LOGO PARALLAX ===================================================== */  const server =     document.getElementById("server");   document.addEventListener(     "mousemove",     (event) => {          const x =             (                 event.clientX /                 window\.innerWidth                 - .5             ) * 25;          const y =             (                 event.clientY /                 window\.innerHeight                 - .5             ) * 25;          server.style.transform =             \`translate(${x}px, ${y}px)\`;     } );  </script>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   PURPLE / BLUE PARTICLES
+===================================================== */
+
+const stars =
+    document.getElementById("stars");
+
+for(
+    let i = 0;
+    i < 120;
+    i++
+){
+
+    const star =
+        document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    stars.appendChild(star);
+}
+
+
+/* =====================================================
+   CENTER LOGO PARALLAX
+===================================================== */
+
+const server =
+    document.getElementById("server");
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        const x =
+            (
+                event.clientX /
+                window.innerWidth
+                - .5
+            ) * 25;
+
+        const y =
+            (
+                event.clientY /
+                window.innerHeight
+                - .5
+            ) * 25;
+
+        server.style.transform =
+            `translate(${x}px, ${y}px)`;
+    }
+);
+
+</script>
 
 </body>
-
 </html>
