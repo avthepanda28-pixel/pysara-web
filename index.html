@@ -1,0 +1,1604 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PYSARA — Intelligence, But Different.</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"DM Sans",sans-serif;
+    color:#fff;
+    background:#080619;
+    overflow-x:hidden;
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(115,72,255,.25),transparent 28%),
+        radial-gradient(circle at 90% 15%,rgba(0,220,255,.16),transparent 25%),
+        radial-gradient(circle at 70% 75%,rgba(255,48,177,.16),transparent 30%),
+        radial-gradient(circle at 20% 90%,rgba(80,90,255,.15),transparent 25%),
+        #080619;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-4;
+    opacity:.16;
+    background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+    background-size:70px 70px;
+    mask-image:linear-gradient(to bottom,black,transparent 80%);
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#080619;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#7d5cff,#ff4cc9);
+    border-radius:20px;
+}
+
+::selection{
+    background:#8d63ff;
+    color:white;
+}
+
+/* =====================================================
+   AURORA
+===================================================== */
+
+.aurora{
+    position:fixed;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.25;
+    pointer-events:none;
+    z-index:-3;
+    animation:auroraMove 14s ease-in-out infinite alternate;
+}
+
+.aurora.one{
+    background:#6c42ff;
+    top:-250px;
+    left:-200px;
+}
+
+.aurora.two{
+    background:#00d9ff;
+    right:-250px;
+    top:200px;
+    animation-delay:-5s;
+}
+
+.aurora.three{
+    background:#ff36bb;
+    bottom:-300px;
+    left:35%;
+    animation-delay:-9s;
+}
+
+@keyframes auroraMove{
+    0%{
+        transform:translate(0,0) scale(1);
+    }
+    50%{
+        transform:translate(100px,60px) scale(1.15);
+    }
+    100%{
+        transform:translate(-70px,130px) scale(.9);
+    }
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1160px,94%);
+    height:68px;
+    padding:0 12px 0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:100;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(12,10,30,.62);
+    backdrop-filter:blur(25px);
+    border-radius:22px;
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.3),
+        inset 0 1px rgba(255,255,255,.08);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:"Space Grotesk";
+    font-weight:700;
+    letter-spacing:-.5px;
+}
+
+.logo-orb{
+    width:35px;
+    height:35px;
+    border-radius:12px;
+    position:relative;
+    background:linear-gradient(135deg,#7c5cff,#ff4bc7);
+    box-shadow:
+        0 0 25px rgba(124,92,255,.5),
+        0 0 50px rgba(255,75,199,.15);
+}
+
+.logo-orb:before,
+.logo-orb:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:white;
+}
+
+.logo-orb:before{
+    width:8px;
+    height:8px;
+    top:9px;
+    left:9px;
+    box-shadow:9px 9px 0 rgba(255,255,255,.8);
+}
+
+.logo-orb:after{
+    width:5px;
+    height:5px;
+    bottom:7px;
+    right:8px;
+}
+
+.navlinks{
+    display:flex;
+    gap:32px;
+}
+
+.navlinks a{
+    color:#aaa5bf;
+    font-size:13px;
+    transition:.3s;
+}
+
+.navlinks a:hover{
+    color:white;
+}
+
+.nav-cta{
+    padding:12px 18px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#8065ff,#b34dff);
+    box-shadow:0 8px 30px rgba(126,91,255,.3);
+    font-size:12px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.nav-cta:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 40px rgba(126,91,255,.5);
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:150px 20px 100px;
+}
+
+.hero-content{
+    max-width:1050px;
+    position:relative;
+    z-index:3;
+}
+
+.pill{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 14px;
+    border-radius:50px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.05);
+    color:#c5bfd8;
+    font-size:11px;
+    margin-bottom:30px;
+    box-shadow:inset 0 0 20px rgba(255,255,255,.02);
+}
+
+.pill-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#58f7b2;
+    box-shadow:0 0 15px #58f7b2;
+}
+
+.hero h1{
+    font-family:"Space Grotesk";
+    font-size:clamp(60px,10vw,145px);
+    line-height:.84;
+    letter-spacing:-.075em;
+    font-weight:700;
+}
+
+.hero h1 .normal{
+    color:#fff;
+}
+
+.gradient-text{
+    background:linear-gradient(
+        90deg,
+        #7f62ff,
+        #b85dff,
+        #ff52c9,
+        #40dcff,
+        #7f62ff
+    );
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:gradientMove 7s linear infinite;
+}
+
+@keyframes gradientMove{
+    to{
+        background-position:300%;
+    }
+}
+
+.hero-description{
+    max-width:630px;
+    margin:35px auto;
+    color:#8f8aa4;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.button-main{
+    padding:16px 23px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#765bff,#c24eff);
+    box-shadow:
+        0 12px 35px rgba(120,85,255,.3),
+        inset 0 1px rgba(255,255,255,.25);
+    font-weight:700;
+    font-size:13px;
+    transition:.35s;
+}
+
+.button-main:hover{
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 20px 55px rgba(120,85,255,.5);
+}
+
+.button-alt{
+    padding:16px 23px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.13);
+    background:rgba(255,255,255,.045);
+    color:#c4bfd0;
+    font-weight:600;
+    font-size:13px;
+    transition:.35s;
+}
+
+.button-alt:hover{
+    background:rgba(255,255,255,.08);
+    color:white;
+    transform:translateY(-3px);
+}
+
+/* FLOATING ORBS */
+
+.float-orb{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+}
+
+.orb1{
+    width:95px;
+    height:95px;
+    top:22%;
+    left:9%;
+    background:radial-gradient(circle at 30% 30%,#d0c6ff,#6e4bff 45%,transparent 70%);
+    filter:blur(1px);
+    animation:float1 7s ease-in-out infinite;
+}
+
+.orb2{
+    width:70px;
+    height:70px;
+    right:12%;
+    top:27%;
+    background:radial-gradient(circle at 30% 30%,#bdf8ff,#22d9ff 45%,transparent 70%);
+    animation:float2 8s ease-in-out infinite;
+}
+
+.orb3{
+    width:55px;
+    height:55px;
+    bottom:20%;
+    left:18%;
+    background:radial-gradient(circle,#ff91de,#ff3ebd 45%,transparent 70%);
+    animation:float1 9s ease-in-out infinite reverse;
+}
+
+@keyframes float1{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(30px,-35px)}
+}
+
+@keyframes float2{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-30px,40px)}
+}
+
+/* =====================================================
+   GENERAL SECTION
+===================================================== */
+
+section{
+    padding:140px max(20px,6vw);
+    position:relative;
+}
+
+.section-top{
+    max-width:1150px;
+    margin:auto;
+}
+
+.label{
+    color:#8c72ff;
+    text-transform:uppercase;
+    font-size:10px;
+    letter-spacing:3px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.section-title{
+    font-family:"Space Grotesk";
+    font-size:clamp(42px,6vw,82px);
+    line-height:.95;
+    letter-spacing:-.06em;
+}
+
+.section-description{
+    color:#858096;
+    max-width:600px;
+    line-height:1.8;
+    margin-top:22px;
+}
+
+/* =====================================================
+   LIVE AI PANEL
+===================================================== */
+
+.ai-panel{
+    max-width:1150px;
+    margin:65px auto 0;
+    min-height:500px;
+    border-radius:32px;
+    border:1px solid rgba(255,255,255,.11);
+    background:
+        linear-gradient(135deg,rgba(119,91,255,.08),rgba(255,58,194,.035)),
+        rgba(10,8,27,.75);
+    backdrop-filter:blur(20px);
+    overflow:hidden;
+    position:relative;
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.08);
+}
+
+.ai-panel:before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:#674dff;
+    opacity:.12;
+    filter:blur(100px);
+    right:-100px;
+    top:-180px;
+}
+
+.ai-topbar{
+    height:65px;
+    padding:0 24px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.window-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#3b3650;
+}
+
+.ai-title{
+    margin-left:12px;
+    color:#77718b;
+    font-size:11px;
+}
+
+.ai-body{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    min-height:435px;
+}
+
+.ai-side{
+    padding:35px;
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.ai-avatar{
+    width:75px;
+    height:75px;
+    border-radius:24px;
+    background:
+        radial-gradient(circle at 30% 25%,#fff,transparent 8%),
+        linear-gradient(135deg,#7159ff,#ff4cc8);
+    box-shadow:
+        0 0 45px rgba(120,85,255,.4),
+        inset 0 0 30px rgba(255,255,255,.18);
+    margin-bottom:25px;
+    position:relative;
+}
+
+.ai-avatar:after{
+    content:"";
+    position:absolute;
+    inset:12px;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:17px;
+}
+
+.ai-side h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.ai-side p{
+    color:#77718a;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.ai-status{
+    margin-top:30px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#8e89a0;
+    font-size:11px;
+}
+
+.green{
+    width:7px;
+    height:7px;
+    background:#55f0ad;
+    border-radius:50%;
+    box-shadow:0 0 12px #55f0ad;
+}
+
+.chat{
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:18px;
+}
+
+.message{
+    max-width:75%;
+    padding:15px 17px;
+    border-radius:18px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.message.ai{
+    align-self:flex-start;
+    background:linear-gradient(135deg,rgba(112,83,255,.18),rgba(183,68,255,.08));
+    border:1px solid rgba(139,110,255,.16);
+    color:#d2cde1;
+    border-bottom-left-radius:5px;
+}
+
+.message.user{
+    align-self:flex-end;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    color:#aaa4ba;
+    border-bottom-right-radius:5px;
+}
+
+.typing-dots{
+    display:flex;
+    gap:5px;
+    padding:5px;
+}
+
+.typing-dots span{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#9d83ff;
+    animation:typing 1s infinite;
+}
+
+.typing-dots span:nth-child(2){
+    animation-delay:.15s;
+}
+
+.typing-dots span:nth-child(3){
+    animation-delay:.3s;
+}
+
+@keyframes typing{
+    0%,100%{opacity:.25;transform:translateY(0)}
+    50%{opacity:1;transform:translateY(-4px)}
+}
+
+/* =====================================================
+   FEATURE CARDS
+===================================================== */
+
+.features{
+    max-width:1150px;
+    margin:65px auto 0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.feature{
+    min-height:370px;
+    padding:30px;
+    border-radius:27px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.035);
+    transition:.5s;
+}
+
+.feature:hover{
+    transform:translateY(-10px);
+    border-color:rgba(255,255,255,.2);
+}
+
+.feature:nth-child(1){
+    background:
+        radial-gradient(circle at 80% 20%,rgba(117,88,255,.25),transparent 45%),
+        rgba(255,255,255,.035);
+}
+
+.feature:nth-child(2){
+    background:
+        radial-gradient(circle at 80% 20%,rgba(0,210,255,.18),transparent 45%),
+        rgba(255,255,255,.035);
+}
+
+.feature:nth-child(3){
+    background:
+        radial-gradient(circle at 80% 20%,rgba(255,55,191,.2),transparent 45%),
+        rgba(255,255,255,.035);
+}
+
+.feature-icon{
+    width:58px;
+    height:58px;
+    display:grid;
+    place-items:center;
+    border-radius:18px;
+    margin-bottom:70px;
+    font-size:22px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.feature h3{
+    font-family:"Space Grotesk";
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.feature p{
+    color:#777287;
+    line-height:1.7;
+    font-size:13px;
+}
+
+/* =====================================================
+   COLORFUL STATS
+===================================================== */
+
+.stats{
+    max-width:1150px;
+    margin:70px auto 0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:35px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.03);
+}
+
+.stat:nth-child(1){
+    box-shadow:inset 0 0 50px rgba(112,82,255,.08);
+}
+
+.stat:nth-child(2){
+    box-shadow:inset 0 0 50px rgba(0,216,255,.07);
+}
+
+.stat:nth-child(3){
+    box-shadow:inset 0 0 50px rgba(255,55,191,.07);
+}
+
+.stat:nth-child(4){
+    box-shadow:inset 0 0 50px rgba(86,255,180,.06);
+}
+
+.stat-number{
+    font-family:"Space Grotesk";
+    font-size:45px;
+    letter-spacing:-.06em;
+}
+
+.stat-label{
+    color:#696478;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-top:8px;
+}
+
+/* =====================================================
+   CREATIVE SECTION
+===================================================== */
+
+.creation{
+    max-width:1150px;
+    margin:70px auto 0;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:20px;
+}
+
+.creation-main{
+    min-height:560px;
+    border-radius:32px;
+    border:1px solid rgba(255,255,255,.1);
+    overflow:hidden;
+    position:relative;
+    padding:35px;
+    background:
+        radial-gradient(circle at 25% 20%,rgba(126,88,255,.32),transparent 30%),
+        radial-gradient(circle at 75% 80%,rgba(255,55,192,.22),transparent 35%),
+        #0d0a24;
+}
+
+.creation-main h3{
+    font-family:"Space Grotesk";
+    font-size:28px;
+}
+
+.creation-main p{
+    color:#817a97;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.art{
+    position:absolute;
+    width:360px;
+    height:360px;
+    left:50%;
+    top:58%;
+    transform:translate(-50%,-50%) rotate(-8deg);
+    border-radius:35% 65% 55% 45%;
+    background:
+        radial-gradient(circle at 25% 25%,#fff,transparent 5%),
+        radial-gradient(circle at 70% 30%,#4de5ff,transparent 15%),
+        radial-gradient(circle at 40% 70%,#ff4ac9,transparent 20%),
+        linear-gradient(135deg,#7056ff,#20144f);
+    filter:drop-shadow(0 30px 60px rgba(99,65,255,.4));
+    animation:artFloat 7s ease-in-out infinite;
+}
+
+.art:before{
+    content:"";
+    position:absolute;
+    inset:35px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    transform:rotate(30deg);
+}
+
+.art:after{
+    content:"PYSARA";
+    position:absolute;
+    bottom:35px;
+    left:35px;
+    font-family:"Space Grotesk";
+    font-size:13px;
+    letter-spacing:5px;
+    color:rgba(255,255,255,.7);
+}
+
+@keyframes artFloat{
+    0%,100%{
+        transform:translate(-50%,-50%) rotate(-8deg);
+    }
+    50%{
+        transform:translate(-50%,-55%) rotate(5deg) scale(1.04);
+    }
+}
+
+.creation-side{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.mini-card{
+    flex:1;
+    padding:30px;
+    border-radius:28px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.035);
+}
+
+.mini-card span{
+    color:#8571ff;
+    font-size:11px;
+}
+
+.mini-card h3{
+    font-family:"Space Grotesk";
+    margin:35px 0 10px;
+    font-size:22px;
+}
+
+.mini-card p{
+    color:#716c7e;
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.cta{
+    max-width:1150px;
+    margin:auto;
+    text-align:center;
+    padding:120px 30px;
+    border-radius:35px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.1);
+    background:
+        radial-gradient(circle at 50% 120%,rgba(255,47,190,.2),transparent 40%),
+        radial-gradient(circle at 50% -20%,rgba(92,71,255,.3),transparent 45%),
+        rgba(13,10,35,.8);
+}
+
+.cta:before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.05);
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    box-shadow:
+        0 0 0 60px rgba(255,255,255,.015),
+        0 0 0 120px rgba(255,255,255,.01);
+}
+
+.cta-content{
+    position:relative;
+    z-index:2;
+}
+
+.cta h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(48px,7vw,95px);
+    line-height:.9;
+    letter-spacing:-.07em;
+}
+
+.cta p{
+    max-width:550px;
+    color:#858096;
+    margin:25px auto 35px;
+    line-height:1.8;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    max-width:1150px;
+    margin:auto;
+    padding:60px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    display:flex;
+    justify-content:space-between;
+    color:#5f5a70;
+    font-size:11px;
+}
+
+.footer-logo{
+    color:#aaa4ba;
+    font-family:"Space Grotesk";
+    font-weight:700;
+}
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:1s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .navlinks{
+        display:none;
+    }
+
+    nav{
+        width:94%;
+    }
+
+    .hero h1{
+        font-size:17vw;
+    }
+
+    .ai-body{
+        grid-template-columns:1fr;
+    }
+
+    .ai-side{
+        border-right:0;
+        border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .creation{
+        grid-template-columns:1fr;
+    }
+
+    .creation-main{
+        min-height:500px;
+    }
+
+    footer{
+        margin:0 20px;
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+@media(max-width:520px){
+
+    section{
+        padding:100px 18px;
+    }
+
+    .hero{
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .message{
+        max-width:90%;
+    }
+
+    .art{
+        width:280px;
+        height:280px;
+    }
+
+    .cta{
+        padding:90px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- AURORA BACKGROUND -->
+<div class="aurora one"></div>
+<div class="aurora two"></div>
+<div class="aurora three"></div>
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav>
+
+    <a href="#" class="logo">
+        <div class="logo-orb"></div>
+        PYSARA
+    </a>
+
+    <div class="navlinks">
+        <a href="#core">Core</a>
+        <a href="#features">Capabilities</a>
+        <a href="#create">Create</a>
+        <a href="#future">Future</a>
+    </div>
+
+    <a href="#core" class="nav-cta">
+        Enter Pysara →
+    </a>
+
+</nav>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero">
+
+    <div class="float-orb orb1"></div>
+    <div class="float-orb orb2"></div>
+    <div class="float-orb orb3"></div>
+
+    <div class="hero-content">
+
+        <div class="pill">
+            <span class="pill-dot"></span>
+            PYSARA CORE IS ONLINE
+        </div>
+
+        <h1>
+            <span class="normal">THINK</span><br>
+            <span class="gradient-text">BEYOND.</span>
+        </h1>
+
+        <p class="hero-description">
+            PYSARA is an intelligent creative system built to turn
+            questions into ideas, ideas into creations, and creations
+            into something nobody expected.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#core" class="button-main">
+                Discover PYSARA ✦
+            </a>
+
+            <a href="#create" class="button-alt">
+                See what it can do
+            </a>
+        </div>
+
+    </div>
+
+</header>
+
+<!-- =====================================================
+     CORE
+===================================================== -->
+
+<section id="core">
+
+    <div class="section-top reveal">
+
+        <div class="label">
+            01 / PYSARA CORE
+        </div>
+
+        <h2 class="section-title">
+            Not just an AI.<br>
+            A whole new layer.
+        </h2>
+
+        <p class="section-description">
+            PYSARA brings reasoning, imagination, vision and conversation
+            together inside one constantly evolving intelligence.
+        </p>
+
+    </div>
+
+    <div class="ai-panel reveal">
+
+        <div class="ai-topbar">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="ai-title">
+                PYSARA / INTELLIGENCE INTERFACE
+            </span>
+        </div>
+
+        <div class="ai-body">
+
+            <div class="ai-side">
+
+                <div class="ai-avatar"></div>
+
+                <h3>PYSARA Core</h3>
+
+                <p>
+                    Your digital intelligence layer.
+                    Think. Create. Explore. Repeat.
+                </p>
+
+                <div class="ai-status">
+                    <span class="green"></span>
+                    Neural systems active
+                </div>
+
+            </div>
+
+            <div class="chat">
+
+                <div class="message ai">
+                    Hey. I'm Pysara. Give me something interesting.
+                </div>
+
+                <div class="message user">
+                    Create something nobody has seen before.
+                </div>
+
+                <div class="message ai">
+                    Interesting request.
+                    <br><br>
+                    Let's not start with a website.
+                    Let's start with a universe.
+                </div>
+
+                <div class="message ai">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
+
+<section id="features">
+
+    <div class="section-top reveal">
+
+        <div class="label">
+            02 / CAPABILITIES
+        </div>
+
+        <h2 class="section-title">
+            One mind.<br>
+            Many worlds.
+        </h2>
+
+        <p class="section-description">
+            PYSARA isn't designed around one task.
+            It's designed around possibility.
+        </p>
+
+    </div>
+
+    <div class="features">
+
+        <div class="feature reveal">
+
+            <div class="feature-icon">✦</div>
+
+            <h3>Imagine</h3>
+
+            <p>
+                Generate concepts, worlds, stories, designs and ideas
+                from nothing more than a thought.
+            </p>
+
+        </div>
+
+        <div class="feature reveal">
+
+            <div class="feature-icon">◉</div>
+
+            <h3>Understand</h3>
+
+            <p>
+                Connect information, recognize patterns and transform
+                complicated ideas into something that makes sense.
+            </p>
+
+        </div>
+
+        <div class="feature reveal">
+
+            <div class="feature-icon">⌁</div>
+
+            <h3>Create</h3>
+
+            <p>
+                Turn imagination into websites, experiences, interfaces,
+                code and completely new digital creations.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section>
+
+    <div class="stats reveal">
+
+        <div class="stat">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">IDEAS POSSIBLE</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">ALWAYS THINKING</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">01</div>
+            <div class="stat-label">CORE INTELLIGENCE</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">BUILT TO CREATE</div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     CREATIVE
+===================================================== -->
+
+<section id="create">
+
+    <div class="section-top reveal">
+
+        <div class="label">
+            03 / CREATION
+        </div>
+
+        <h2 class="section-title">
+            Give it a thought.<br>
+            Watch it evolve.
+        </h2>
+
+        <p class="section-description">
+            PYSARA doesn't stop at answers.
+            It takes ideas somewhere unexpected.
+        </p>
+
+    </div>
+
+    <div class="creation">
+
+        <div class="creation-main reveal">
+
+            <h3>PYSARA Studio</h3>
+
+            <p>
+                Where intelligence becomes creativity.
+            </p>
+
+            <div class="art"></div>
+
+        </div>
+
+        <div class="creation-side">
+
+            <div class="mini-card reveal">
+
+                <span>01 / VISUALS</span>
+
+                <h3>From words → worlds.</h3>
+
+                <p>
+                    Describe a concept and watch PYSARA turn abstract
+                    ideas into visual experiences.
+                </p>
+
+            </div>
+
+            <div class="mini-card reveal">
+
+                <span>02 / CODE</span>
+
+                <h3>From thought → reality.</h3>
+
+                <p>
+                    Build interfaces, prototypes and digital experiences
+                    without starting from zero.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FUTURE
+===================================================== -->
+
+<section id="future">
+
+    <div class="cta reveal">
+
+        <div class="cta-content">
+
+            <div class="label">
+                PYSARA / FUTURE
+            </div>
+
+            <h2>
+                THE NEXT<br>
+                IDEA IS YOURS.
+            </h2>
+
+            <p>
+                Intelligence should make you more creative,
+                not less human.
+            </p>
+
+            <a href="#core" class="button-main">
+                Enter the universe ✦
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        PYSARA
+    </div>
+
+    <div>
+        Intelligence, but different.
+    </div>
+
+    <div>
+        © 2026 PYSARA AI
+    </div>
+
+</footer>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   SCROLL REVEALS
+===================================================== */
+
+const revealObserver = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("show");
+
+                revealObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },
+    {
+        threshold:.12
+    }
+);
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(element => revealObserver.observe(element));
+
+
+/* =====================================================
+   MOUSE PARALLAX
+===================================================== */
+
+const orbs = document.querySelectorAll(".float-orb");
+
+document.addEventListener("mousemove", event => {
+
+    const x = (event.clientX / window.innerWidth - .5);
+    const y = (event.clientY / window.innerHeight - .5);
+
+    orbs.forEach((orb,index) => {
+
+        const strength = (index + 1) * 12;
+
+        orb.style.marginLeft = `${x * strength}px`;
+        orb.style.marginTop = `${y * strength}px`;
+
+    });
+
+});
+
+
+/* =====================================================
+   FEATURE CARD TILT
+===================================================== */
+
+document.querySelectorAll(".feature").forEach(card => {
+
+    card.addEventListener("mousemove", event => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateY =
+            ((x / rect.width) - .5) * 7;
+
+        const rotateX =
+            ((y / rect.height) - .5) * -7;
+
+        card.style.transform =
+            `perspective(900px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-10px)`;
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+            "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+
+    });
+
+});
+
+
+/* =====================================================
+   NAVBAR SCROLL EFFECT
+===================================================== */
+
+const nav = document.querySelector("nav");
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 80){
+
+        nav.style.background =
+            "rgba(10,8,26,.86)";
+
+        nav.style.boxShadow =
+            "0 20px 70px rgba(0,0,0,.45)";
+
+    }else{
+
+        nav.style.background =
+            "rgba(12,10,30,.62)";
+
+        nav.style.boxShadow =
+            "0 20px 70px rgba(0,0,0,.3)";
+
+    }
+
+});
+
+
+/* =====================================================
+   RANDOM BACKGROUND PARTICLES
+===================================================== */
+
+const particleContainer = document.createElement("div");
+
+particleContainer.style.position = "fixed";
+particleContainer.style.inset = "0";
+particleContainer.style.pointerEvents = "none";
+particleContainer.style.zIndex = "-2";
+
+document.body.appendChild(particleContainer);
+
+for(let i=0;i<35;i++){
+
+    const particle = document.createElement("div");
+
+    const size = Math.random() * 3 + 1;
+
+    particle.style.position = "absolute";
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.borderRadius = "50%";
+
+    particle.style.left =
+        `${Math.random()*100}%`;
+
+    particle.style.top =
+        `${Math.random()*100}%`;
+
+    particle.style.background =
+        Math.random() > .5
+        ? "#a98cff"
+        : "#49dcff";
+
+    particle.style.opacity =
+        Math.random()*.45;
+
+    particle.style.boxShadow =
+        `0 0 12px ${particle.style.background}`;
+
+    particle.style.animation =
+        `particleFloat ${5+Math.random()*10}s ease-in-out infinite`;
+
+    particleContainer.appendChild(particle);
+
+}
+
+
+/* =====================================================
+   PARTICLE ANIMATION
+===================================================== */
+
+const particleStyle = document.createElement("style");
+
+particleStyle.innerHTML = `
+
+@keyframes particleFloat{
+
+    0%,100%{
+        transform:translate3d(0,0,0);
+        opacity:.15;
+    }
+
+    50%{
+        transform:
+            translate3d(
+                ${Math.random()*50-25}px,
+                ${Math.random()*80-40}px,
+                0
+            );
+        opacity:.55;
+    }
+
+}
+
+`;
+
+document.head.appendChild(particleStyle);
+
+</script>
+
+</body>
+</html>
+```
