@@ -1,24 +1,22 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lurex Kingdom | Official Community</title>
+<title>Lurex Kingdom — The Kingdom Awaits</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
-@import url(
-'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
-);
-
-
-/* =====================================================
+/* =========================================================
    GLOBAL
-===================================================== */
+========================================================= */
 
 * {
     margin: 0;
@@ -31,597 +29,867 @@ html {
 }
 
 body {
-
-    font-family: "Inter", sans-serif;
-
-    background: #07040d;
-
-    color: #ffffff;
-
+    background: #04020a;
+    color: #fff;
+    font-family: "Orbitron", sans-serif;
     overflow-x: hidden;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-/* =====================================================
+::selection {
+    background: #a855f7;
+    color: white;
+}
+
+
+/* =========================================================
    BACKGROUND
-===================================================== */
+========================================================= */
 
-.background {
-
+body::before {
+    content: "";
     position: fixed;
-
     inset: 0;
-
-    z-index: -20;
+    z-index: -5;
 
     background:
-
         radial-gradient(
-            circle at 75% 28%,
-            rgba(139,92,246,.18),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 15% 80%,
-            rgba(168,85,247,.10),
+            circle at 15% 20%,
+            rgba(140, 50, 255, .18),
             transparent 30%
         ),
 
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(0, 200, 255, .10),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(255, 0, 180, .08),
+            transparent 35%
+        ),
+
+        #04020a;
+}
+
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+    z-index: -4;
+
+    background-image:
         linear-gradient(
-            135deg,
-            #0b0614,
-            #11091c,
-            #08040f
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 80px 80px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
         );
 }
 
 
-.glow {
-
-    position: fixed;
-
-    border-radius: 50%;
-
-    filter: blur(120px);
-
-    pointer-events: none;
-
-    z-index: -15;
-}
-
-
-.glow.one {
-
-    width: 500px;
-
-    height: 500px;
-
-    background:
-        rgba(139,92,246,.14);
-
-    top: 10%;
-
-    right: 0;
-}
-
-
-.glow.two {
-
-    width: 400px;
-
-    height: 400px;
-
-    background:
-        rgba(0,191,255,.06);
-
-    bottom: 5%;
-
-    left: 0;
-}
-
-
-/* =====================================================
+/* =========================================================
    PARTICLES
-===================================================== */
+========================================================= */
 
-.stars {
-
+#particles {
     position: fixed;
-
     inset: 0;
-
     pointer-events: none;
-
-    z-index: -10;
+    z-index: -2;
 }
 
-
-.star {
-
+.particle {
     position: absolute;
 
     width: 3px;
-
     height: 3px;
-
-    background: #c084ff;
 
     border-radius: 50%;
 
+    background: white;
+
+    box-shadow:
+        0 0 10px #a855f7,
+        0 0 25px #7c3aed;
+
+    opacity: .5;
+
     animation:
-        twinkle 4s infinite ease-in-out,
-        drift 12s infinite ease-in-out;
+        particleFloat
+        var(--duration)
+        infinite ease-in-out;
 }
 
+@keyframes particleFloat {
 
-@keyframes twinkle {
+    0% {
+        transform:
+            translate3d(0,0,0)
+            scale(.5);
 
-    0%,
-    100% {
-
-        opacity: .1;
-
-        transform: scale(.7);
+        opacity: 0;
     }
 
     50% {
-
-        opacity: .8;
-
-        transform: scale(1.4);
+        opacity: 1;
     }
-}
 
-
-@keyframes drift {
-
-    0%,
     100% {
+        transform:
+            translate3d(
+                var(--x),
+                -120px,
+                0
+            )
+            scale(1.2);
 
-        margin-left: 0;
-
-        margin-top: 0;
-    }
-
-    50% {
-
-        margin-left: 12px;
-
-        margin-top: -15px;
+        opacity: 0;
     }
 }
 
 
-/* =====================================================
-   NAVBAR
-===================================================== */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 nav {
+    position: fixed;
 
-    width: 90%;
+    top: 0;
+    left: 0;
 
-    max-width: 1500px;
+    width: 100%;
 
-    margin: auto;
-
-    padding: 30px 0;
+    padding:
+        22px
+        7%;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
+
+    z-index: 1000;
+
+    background:
+        rgba(4,2,10,.45);
+
+    backdrop-filter:
+        blur(20px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
 }
 
-
 .logo {
-
-    font-size: 24px;
+    font-size: 20px;
 
     font-weight: 900;
 
-    letter-spacing: -1px;
-}
-
-
-.logo span {
+    letter-spacing: 5px;
 
     background:
-
         linear-gradient(
             90deg,
-            #ffffff,
-            #b46cff,
-            #f2e6ff
+            #fff,
+            #b66cff,
+            #65eaff,
+            #fff
         );
 
-    -webkit-background-clip: text;
+    background-size: 250%;
 
+    -webkit-background-clip: text;
     color: transparent;
+
+    animation:
+        logoGradient
+        5s
+        linear
+        infinite;
 }
 
+@keyframes logoGradient {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 250%;
+    }
+}
 
 .nav-links {
-
     display: flex;
-
-    align-items: center;
-
-    gap: 30px;
+    gap: 32px;
 }
 
-
 .nav-links a {
+    color: #777;
 
-    color: #b9aac7;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: 600;
+    font-size: 11px;
 
     transition: .3s;
 }
 
-
 .nav-links a:hover {
+    color: white;
 
-    color: #c084ff;
+    text-shadow:
+        0 0 15px
+        #a855f7;
 }
 
+.join-nav {
+    padding:
+        11px
+        18px;
 
-.nav-button {
-
-    color: #12091b !important;
-
-    padding: 12px 20px;
-
-    border-radius: 12px;
+    border-radius: 10px;
 
     background:
-
         linear-gradient(
-            100deg,
-            #7c3aed,
-            #a855f7,
-            #e9d5ff
+            135deg,
+            #7437ff,
+            #d13cff
         );
 
-    box-shadow:
-        0 8px 30px
-        rgba(139,92,246,.22);
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero {
-
-    width: 90%;
-
-    max-width: 1500px;
-
-    min-height:
-        calc(100vh - 80px);
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns:
-        1.05fr .95fr;
-
-    align-items: center;
-
-    gap: 40px;
-}
-
-
-.hero-left {
-
-    position: relative;
-
-    z-index: 5;
-}
-
-
-.badge {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 13px 20px;
-
-    border-radius: 999px;
-
-    color: #c084ff;
+    font-size: 10px;
 
     font-weight: 800;
 
-    font-size: 13px;
+    box-shadow:
+        0 0 25px
+        rgba(145,50,255,.35);
 
-    letter-spacing: .5px;
+    transition: .3s;
+}
+
+.join-nav:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 0 40px
+        rgba(145,50,255,.7);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+
+    padding:
+        120px
+        20px
+        80px;
+}
+
+.hero-orb {
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    border-radius: 50%;
 
     background:
-        rgba(139,92,246,.09);
+        radial-gradient(
+            circle,
+            rgba(153,70,255,.25),
+            transparent 65%
+        );
+
+    filter:
+        blur(10px);
+
+    animation:
+        orbPulse
+        5s
+        infinite ease-in-out;
+}
+
+@keyframes orbPulse {
+
+    0%,100% {
+        transform:
+            scale(.95);
+    }
+
+    50% {
+        transform:
+            scale(1.12);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+.eyebrow {
+    display: inline-block;
+
+    padding:
+        10px
+        18px;
 
     border:
         1px solid
-        rgba(192,132,252,.35);
+        rgba(180,100,255,.3);
 
-    margin-bottom: 35px;
+    border-radius: 100px;
+
+    background:
+        rgba(130,50,255,.08);
+
+    color:
+        #c99cff;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 28px;
 }
 
-
-.badge::before {
-
-    content: "✦";
-
-    color: #ffffff;
-
-    text-shadow:
-        0 0 15px #b46cff;
-}
-
-
-h1 {
-
+.hero h1 {
     font-size:
-        clamp(65px, 7vw, 115px);
+        clamp(
+            60px,
+            11vw,
+            145px
+        );
 
-    line-height: .87;
+    line-height: .82;
 
     letter-spacing: -7px;
 
     font-weight: 900;
 
-    margin-bottom: 38px;
-}
-
-
-.white {
-
-    color: #ffffff;
-}
-
-
-.gradient {
-
     background:
-
         linear-gradient(
-            90deg,
-            #7c3aed,
-            #a855f7,
-            #f3e8ff,
-            #a855f7
+            120deg,
+            #fff,
+            #c36cff,
+            #67eaff,
+            #fff
         );
+
+    background-size: 300%;
 
     -webkit-background-clip: text;
 
-    background-clip: text;
-
     color: transparent;
+
+    animation:
+        titleGradient
+        7s
+        linear
+        infinite;
+
+    filter:
+        drop-shadow(
+            0 0 40px
+            rgba(160,70,255,.25)
+        );
 }
 
+@keyframes titleGradient {
 
-.hero-description {
+    0% {
+        background-position: 0%;
+    }
 
-    max-width: 760px;
+    100% {
+        background-position: 300%;
+    }
+}
 
-    color: #b7a9c2;
+.hero p {
+    max-width: 650px;
 
-    font-size: 18px;
+    margin:
+        35px
+        auto;
+
+    color: #92929b;
+
+    font-size: 13px;
 
     line-height: 1.9;
-
-    margin-bottom: 35px;
 }
 
-
-.hero-description strong {
-
-    color: #e5bd5b;
-}
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.buttons {
-
+.hero-buttons {
     display: flex;
+
+    justify-content: center;
 
     gap: 15px;
 
     flex-wrap: wrap;
 }
 
-
 .btn {
+    padding:
+        16px
+        28px;
 
-    min-width: 210px;
+    border-radius: 12px;
 
-    padding: 19px 28px;
-
-    border-radius: 16px;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-decoration: none;
+    font-size: 11px;
 
     font-weight: 800;
 
-    transition: .3s;
+    transition: .35s;
 }
 
-
-.primary {
-
-    color: #12091b;
-
+.btn-main {
     background:
-
         linear-gradient(
-            100deg,
-            #7c3aed,
-            #e4b849,
-            #f3e8ff
+            135deg,
+            #7838ff,
+            #d13cff
         );
 
     box-shadow:
-        0 10px 45px
-        rgba(139,92,246,.25);
+        0 0 30px
+        rgba(140,50,255,.4);
 }
 
+.btn-main:hover {
+    transform:
+        translateY(-5px)
+        scale(1.03);
 
-.primary:hover {
+    box-shadow:
+        0 0 55px
+        rgba(140,50,255,.8);
+}
+
+.btn-secondary {
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    background:
+        rgba(255,255,255,.03);
+
+    color: #aaa;
+}
+
+.btn-secondary:hover {
+    color: white;
+
+    border-color:
+        rgba(190,100,255,.5);
 
     transform:
         translateY(-5px);
-
-    box-shadow:
-        0 15px 60px
-        rgba(139,92,246,.40);
 }
 
 
-.secondary {
+/* =========================================================
+   SECTIONS
+========================================================= */
 
-    color: #f5f0ff;
+section {
+    padding:
+        130px 8%;
+}
+
+.section-header {
+    text-align: center;
+
+    margin-bottom: 70px;
+}
+
+.section-header span {
+    color: #a855f7;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+.section-header h2 {
+    margin-top: 15px;
+
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            60px
+        );
+}
+
+
+/* =========================================================
+   FEATURE CARDS
+========================================================= */
+
+.feature-grid {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.feature {
+    min-height: 280px;
+
+    padding: 35px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 24px;
 
     background:
-        rgba(255,255,255,.035);
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.015)
+        );
 
     border:
         1px solid
-        rgba(255,255,255,.12);
-}
+        rgba(255,255,255,.08);
 
-
-.secondary:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(192,132,252,.45);
-}
-
-
-/* =====================================================
-   HERO RIGHT
-===================================================== */
-
-.hero-right {
-
-    height: 620px;
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-
-.server-container {
-
-    width: 250px;
-
-    height: 250px;
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    backdrop-filter:
+        blur(20px);
 
     transition:
-        transform .15s ease-out;
+        transform .5s,
+        border .5s,
+        box-shadow .5s;
+}
+
+.feature:hover {
+    transform:
+        translateY(-12px);
+
+    border-color:
+        rgba(180,100,255,.35);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.4),
+
+        0 0 40px
+        rgba(130,50,255,.12);
+}
+
+.feature-icon {
+    font-size: 30px;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        rgba(150,70,255,.1);
+
+    border:
+        1px solid
+        rgba(180,100,255,.2);
+
+    margin-bottom: 25px;
+}
+
+.feature h3 {
+    font-size: 20px;
+
+    margin-bottom: 15px;
+}
+
+.feature p {
+    color: #85858e;
+
+    font-size: 11px;
+
+    line-height: 1.9;
 }
 
 
-.server-glow {
+/* =========================================================
+   THRONE ROOM
+========================================================= */
 
+.throne-section {
+    position: relative;
+
+    overflow: hidden;
+}
+
+.throne-glow {
     position: absolute;
 
-    width: 400px;
+    width: 600px;
+    height: 600px;
 
-    height: 400px;
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
 
     border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-            rgba(168,85,247,.30),
+            rgba(130,50,255,.13),
             transparent 65%
         );
 
-    animation:
-        pulse 4s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.throne-room {
+    max-width: 1250px;
+
+    margin: auto;
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 14px;
+
+    align-items: stretch;
 }
 
 
-@keyframes pulse {
+/* =========================================================
+   OWNER CARDS
+========================================================= */
 
-    0%,
-    100% {
+.member {
+    position: relative;
 
-        transform:
-            scale(.9);
+    min-height: 420px;
 
-        opacity: .55;
-    }
+    padding:
+        25px
+        20px;
 
-    50% {
+    overflow: hidden;
 
-        transform:
-            scale(1.08);
+    border-radius: 24px;
 
-        opacity: 1;
-    }
+    background:
+        linear-gradient(
+            160deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.012)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    backdrop-filter:
+        blur(25px);
+
+    transition:
+        .6s cubic-bezier(
+            .2,.8,.2,1
+        );
 }
 
-
-.server-ring {
+.member::before {
+    content: "";
 
     position: absolute;
 
-    width: 310px;
+    width: 180px;
+    height: 180px;
 
-    height: 310px;
+    top: -80px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background:
+        #9b4dff;
+
+    filter:
+        blur(90px);
+
+    opacity: .13;
+
+    transition: .5s;
+}
+
+.member:hover {
+    transform:
+        translateY(-15px)
+        scale(1.025);
+
+    border-color:
+        rgba(180,100,255,.5);
+
+    box-shadow:
+        0 30px 70px
+        rgba(0,0,0,.5),
+
+        0 0 45px
+        rgba(140,50,255,.18);
+}
+
+.member:hover::before {
+    opacity: .35;
+}
+
+
+/* CENTER MEMBER */
+
+.member.center {
+    transform:
+        translateY(-25px);
+
+    border-color:
+        rgba(180,100,255,.28);
+
+    box-shadow:
+        0 25px 70px
+        rgba(100,30,200,.18);
+}
+
+.member.center:hover {
+    transform:
+        translateY(-40px)
+        scale(1.035);
+}
+
+
+/* MEMBER VISUAL */
+
+.member-visual {
+    height: 190px;
+
+    border-radius: 18px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(160,70,255,.2),
+            rgba(10,5,20,.5)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.member-visual::before {
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
 
     border-radius: 50%;
 
     border:
         1px solid
-        rgba(124,77,255,.3);
+        rgba(190,100,255,.35);
+
+    box-shadow:
+        0 0 40px
+        rgba(150,70,255,.3);
 
     animation:
-        rotate 18s linear infinite;
+        ringSpin
+        8s
+        linear
+        infinite;
 }
 
+.member-visual::after {
+    content: "";
 
-@keyframes rotate {
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    border:
+        1px dashed
+        rgba(100,220,255,.4);
+
+    animation:
+        ringSpinReverse
+        5s
+        linear
+        infinite;
+}
+
+@keyframes ringSpin {
 
     from {
         transform:
@@ -634,1205 +902,395 @@ h1 {
     }
 }
 
+@keyframes ringSpinReverse {
 
-.server-logo {
-
-    width: 165px;
-
-    height: 165px;
-
-    border-radius: 35px;
-
-    overflow: hidden;
-
-    position: relative;
-
-    background: #100817;
-
-    border:
-        1px solid
-        rgba(192,132,252,.45);
-
-    box-shadow:
-
-        0 0 70px
-        rgba(168,85,247,.28);
-}
-
-
-.server-logo img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-}
-
-
-/* =====================================================
-   FLOATING BUBBLES — RIGHT SIDE AROUND LOGO
-===================================================== */
-
-.feature {
-
-    position: absolute;
-
-    padding: 14px 20px;
-
-    border-radius: 999px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    background: rgba(8,7,20,.78);
-
-    border: 1px solid rgba(192,132,252,.38);
-
-    color: #eeeafa;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    backdrop-filter: blur(15px);
-
-    box-shadow: 0 15px 45px rgba(0,0,0,.4);
-
-    z-index: 5;
-
-    animation: float 5s ease-in-out infinite;
-}
-
-
-.feature::before {
-
-    content: "";
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #b46cff;
-
-    box-shadow:
-        0 0 12px #b46cff;
-}
-
-
-.feature.one {
-
-    top: 8%;
-
-    right: -2%;
-}
-
-
-.feature.two {
-
-    top: 28%;
-
-    left: 2%;
-
-    animation-delay: 1s;
-}
-
-
-.feature.three {
-
-    top: 68%;
-
-    left: 0;
-
-    animation-delay: 2s;
-}
-
-
-.feature.four {
-
-    top: 78%;
-
-    right: -1%;
-
-    animation-delay: 3s;
-}
-
-
-.feature.five {
-
-    top: 49%;
-
-    right: -5%;
-
-    animation-delay: 1.5s;
-}
-
-
-@keyframes float {
-
-    0%,
-    100% {
-
+    from {
         transform:
-            translateY(0);
+            rotate(360deg);
     }
 
-    50% {
-
+    to {
         transform:
-            translateY(-20px);
+            rotate(0deg);
     }
 }
 
-
-/* =====================================================
-   GENERAL SECTION
-===================================================== */
-
-.section {
-
-    width: 90%;
-
-    max-width: 1300px;
-
-    margin:
-        130px auto;
-}
-
-
-.section-heading {
-
-    text-align: center;
-
-    margin-bottom: 55px;
-}
-
-
-.section-heading h2 {
-
-    font-size: 48px;
-
-    font-weight: 900;
-
-    margin-bottom: 15px;
-}
-
-
-.section-heading h2 span {
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #a855f7,
-            #f3e8ff,
-            #a855f7
-        );
-
-    -webkit-background-clip: text;
-
-    color: transparent;
-}
-
-
-.section-heading p {
-
-    color: #96869f;
-
-    font-size: 16px;
-}
-
-
-/* =====================================================
-   ABOUT
-===================================================== */
-
-.about-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1.2fr .8fr;
-
-    gap: 25px;
-}
-
-
-.about-card {
-
-    padding: 40px;
-
-    border-radius: 25px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.012)
-        );
-
-    border:
-        1px solid
-        rgba(139,92,246,.18);
-
-    transition: .3s;
-}
-
-
-.about-card:hover {
-
-    transform:
-        translateY(-6px);
-
-    border-color:
-        rgba(192,132,252,.35);
-}
-
-
-.about-card h3 {
-
-    color: #d8b4fe;
-
-    font-size: 24px;
-
-    margin-bottom: 18px;
-}
-
-
-.about-card p {
-
-    color: #a899b5;
-
-    line-height: 1.9;
-
-    font-size: 15px;
-}
-
-
-.about-highlight {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    gap: 18px;
-}
-
-
-.highlight {
-
-    padding: 20px;
-
-    border-radius: 17px;
-
-    background:
-        rgba(139,92,246,.06);
-
-    border:
-        1px solid
-        rgba(139,92,246,.15);
-}
-
-
-.highlight strong {
-
-    display: block;
-
-    color: #c084ff;
-
-    font-size: 17px;
-
-    margin-bottom: 5px;
-}
-
-
-.highlight span {
-
-    color: #82718d;
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   DO'S AND DON'TS
-===================================================== */
-
-.rules-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 25px;
-}
-
-
-.rules-card {
-
-    padding: 40px;
-
-    border-radius: 25px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-}
-
-
-.rules-card.do {
-
-    border-color:
-        rgba(139,92,246,.25);
-}
-
-
-.rules-card.dont {
-
-    border-color:
-        rgba(139,92,246,.25);
-}
-
-
-.rules-title {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    margin-bottom: 30px;
-}
-
-
-.rules-icon {
-
-    width: 45px;
-
-    height: 45px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 13px;
-
-    font-size: 20px;
-}
-
-
-.do .rules-icon {
-
-    background:
-        rgba(139,92,246,.10);
-
-    border:
-        1px solid
-        rgba(192,132,252,.25);
-}
-
-
-.dont .rules-icon {
-
-    background:
-        rgba(139,92,246,.10);
-
-    border:
-        1px solid
-        rgba(192,132,252,.25);
-}
-
-
-.rules-title h3 {
-
-    font-size: 25px;
-}
-
-
-.do .rules-title h3 {
-
-    color: #c084ff;
-}
-
-
-.dont .rules-title h3 {
-
-    color: #c084ff;
-}
-
-
-.rule {
-
-    display: flex;
-
-    gap: 13px;
-
-    padding: 14px 0;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.045);
-
-    color: #a99ab5;
-
-    line-height: 1.6;
-
-    font-size: 14px;
-}
-
-
-.rule:last-child {
-
-    border-bottom: none;
-}
-
-
-.rule-symbol {
-
-    font-weight: 900;
-
-    flex-shrink: 0;
-}
-
-
-.do .rule-symbol {
-
-    color: #b46cff;
-}
-
-
-.dont .rule-symbol {
-
-    color: #b46cff;
-}
-
-
-/* =====================================================
-   OWNERS
-===================================================== */
-
-.owner-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 20px;
-}
-
-
-.owner-card {
-
-    padding: 32px 22px;
-
-    text-align: center;
-
-    border-radius: 23px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.012)
-        );
-
-    border:
-        1px solid
-        rgba(139,92,246,.18);
-
-    transition: .35s;
-
+.member-symbol {
     position: relative;
 
-    overflow: hidden;
-}
+    z-index: 3;
 
+    font-size: 52px;
 
-.owner-card:hover {
-
-    transform:
-        translateY(-10px);
-
-    border-color:
-        rgba(192,132,252,.55);
-
-    box-shadow:
-        0 20px 60px
-        rgba(139,92,246,.12);
-}
-
-
-.owner-image {
-
-    width: 100px;
-
-    height: 100px;
-
-    margin:
-        0 auto 20px;
-
-    padding: 3px;
-
-    border-radius: 50%;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #ffe49a,
-            #b67d17,
-            #ffe49a
+    filter:
+        drop-shadow(
+            0 0 20px
+            rgba(180,80,255,.7)
         );
 }
 
 
-.owner-image img {
+/* ROLE */
 
-    width: 100%;
+.member-role {
+    font-size: 8px;
 
-    height: 100%;
+    letter-spacing: 3px;
 
-    object-fit: cover;
+    color: #b86cff;
 
-    border-radius: 50%;
-
-    display: block;
-
-    background: #100817;
+    margin-bottom: 10px;
 }
 
+.member h3 {
+    font-size: 18px;
 
-.owner-card h3 {
-
-    font-size: 20px;
-
-    margin-bottom: 8px;
+    margin-bottom: 13px;
 }
 
+.member p {
+    color: #81818b;
 
-.owner-role {
-
-    display: inline-block;
-
-    color: #c084ff;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
-    margin-bottom: 14px;
-}
-
-
-.owner-description {
-
-    color: #96869f;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-}
-
-
-.owner-description strong {
-
-    color: #c084ff;
-}
-
-
-/* =====================================================
-   BOT OWNER
-===================================================== */
-
-.bot-owner {
-
-    margin-top: 90px;
-
-    padding-top: 70px;
-
-    border-top:
-        1px solid
-        rgba(139,92,246,.14);
-
-    text-align: center;
-}
-
-
-.bot-card {
-
-    width:
-        min(430px, 100%);
-
-    margin: auto;
-
-    padding: 40px 30px;
-
-    border-radius: 26px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(139,92,246,.10),
-            rgba(255,255,255,.015)
-        );
-
-    border:
-        1px solid
-        rgba(192,132,252,.35);
-
-    box-shadow:
-        0 20px 70px
-        rgba(139,92,246,.10);
-
-    transition: .35s;
-}
-
-
-.bot-card:hover {
-
-    transform:
-        translateY(-10px);
-
-    box-shadow:
-        0 25px 80px
-        rgba(139,92,246,.18);
-}
-
-
-/* =====================================================
-   FINAL CTA
-===================================================== */
-
-.cta {
-
-    width: 90%;
-
-    max-width: 1100px;
-
-    margin:
-        150px auto;
-
-    padding:
-        70px 40px;
-
-    text-align: center;
-
-    border-radius: 30px;
-
-    background:
-
-        radial-gradient(
-            circle at center,
-            rgba(139,92,246,.15),
-            transparent 65%
-        ),
-
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid
-        rgba(139,92,246,.22);
-}
-
-
-.cta h2 {
-
-    font-size: 48px;
-
-    font-weight: 900;
-
-    margin-bottom: 15px;
-}
-
-
-.cta h2 span {
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #a855f7,
-            #f3e8ff
-        );
-
-    -webkit-background-clip: text;
-
-    color: transparent;
-}
-
-
-.cta p {
-
-    color: #96869f;
-
-    max-width: 650px;
-
-    margin:
-        0 auto 30px;
+    font-size: 10px;
 
     line-height: 1.8;
 }
 
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* ROLE LINE */
 
-footer {
+.member-line {
+    position: absolute;
 
-    width: 90%;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
 
-    max-width: 1400px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(170,90,255,.5),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   DISCORD CTA
+========================================================= */
+
+.discord-section {
+    padding-top: 70px;
+}
+
+.discord-box {
+    max-width: 1100px;
 
     margin: auto;
 
     padding:
-        30px 0 50px;
+        90px
+        30px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(135,50,255,.23),
+            rgba(8,3,15,.9) 65%
+        );
+
+    border:
+        1px solid
+        rgba(180,100,255,.2);
+
+    box-shadow:
+        0 0 100px
+        rgba(100,30,255,.12);
+}
+
+.discord-box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(180,100,255,.15);
+
+    box-shadow:
+        0 0 100px
+        rgba(160,70,255,.2);
+}
+
+.discord-box h2 {
+    position: relative;
+
+    font-size:
+        clamp(
+            35px,
+            6vw,
+            75px
+        );
+
+    margin-bottom: 20px;
+}
+
+.discord-box p {
+    position: relative;
+
+    max-width: 650px;
+
+    margin:
+        0
+        auto
+        35px;
+
+    color: #92929b;
+
+    font-size: 12px;
+
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding:
+        35px 8%;
 
     border-top:
         1px solid
         rgba(255,255,255,.06);
 
-    text-align: center;
+    display: flex;
 
-    color: #6e5d79;
+    justify-content: space-between;
 
-    font-size: 13px;
+    color: #5f5f67;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
 }
 
 
-footer span {
+/* =========================================================
+   REVEAL
+========================================================= */
 
-    color: #c084ff;
+.reveal {
+    opacity: 0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        1s
+        cubic-bezier(
+            .2,.8,.2,1
+        );
+}
+
+.reveal.active {
+    opacity: 1;
+
+    transform:
+        translateY(0);
 }
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media (max-width: 1050px) {
+@media(max-width:1100px) {
 
-    .hero {
-
-        grid-template-columns: 1fr;
-
-        padding-top: 50px;
-    }
-
-
-    .hero-right {
-
-        height: 550px;
-    }
-
-
-    .about-grid {
-
-        grid-template-columns: 1fr;
-    }
-
-
-    .owner-grid {
-
+    .throne-room {
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(3,1fr);
+    }
+
+    .member.center {
+        transform:
+            none;
     }
 }
 
-
-@media (max-width: 700px) {
+@media(max-width:800px) {
 
     nav {
-
         padding:
-            22px 0;
+            18px 5%;
     }
 
-
-    .nav-links a:not(.nav-button) {
-
+    .nav-links {
         display: none;
     }
 
-
-    h1 {
-
-        font-size: 55px;
-
-        letter-spacing: -4px;
+    .feature-grid {
+        grid-template-columns:
+            1fr;
     }
 
-
-    .hero-description {
-
-        font-size: 16px;
+    .throne-room {
+        grid-template-columns:
+            1fr;
     }
 
-
-    .hero-right {
-
-        height: 470px;
-
+    .member.center {
         transform:
-            scale(.78);
+            none;
     }
 
-
-    .rules-grid {
-
-        grid-template-columns: 1fr;
+    .member.center:hover {
+        transform:
+            translateY(-15px)
+            scale(1.025);
     }
 
-
-    .owner-grid {
-
-        grid-template-columns: 1fr;
-    }
-
-
-    .section-heading h2,
-    .cta h2 {
-
-        font-size: 35px;
-    }
-
-
-    .about-card,
-    .rules-card {
-
-        padding: 28px 22px;
-    }
-
-
-    .cta {
-
+    section {
         padding:
-            50px 25px;
+            100px 5%;
     }
 
-
-    .btn {
-
-        width: 100%;
+    .discord-box {
+        padding:
+            70px 20px;
     }
 
-}
+    footer {
+        flex-direction:
+            column;
 
+        gap: 15px;
 
-/* =====================================================
-   FINAL ACCENT OVERRIDES
-   Purple + white site / gold owners / gold-orange JOIN buttons
-===================================================== */
-
-/* OWNER CARDS — ORIGINAL GOLD LOOK */
-.owner-card {
-    border-color: rgba(218,170,55,.15);
-}
-
-.owner-card:hover {
-    border-color: rgba(218,170,55,.45);
-    box-shadow: 0 20px 60px rgba(218,170,55,.09);
-}
-
-.owner-image {
-    background:
-        linear-gradient(
-            135deg,
-            #ffe49a,
-            #b67d17,
-            #ffe49a
-        );
-}
-
-.owner-role {
-    color: #d9ac43;
-}
-
-.owner-description strong {
-    color: #d9ac43;
-}
-
-.bot-owner {
-    border-top-color: rgba(218,170,55,.10);
-}
-
-.bot-card {
-    border-color: rgba(218,170,55,.30);
-    box-shadow: 0 20px 70px rgba(218,170,55,.08);
-}
-
-.bot-card:hover {
-    box-shadow: 0 25px 80px rgba(218,170,55,.15);
-}
-
-/* ONLY JOIN LUREX KINGDOM BUTTONS */
-.primary {
-    color: #080706;
-
-    background:
-        linear-gradient(
-            100deg,
-            #b76b00,
-            #e5a52f,
-            #ffd66b,
-            #f28c00
-        );
-
-    box-shadow:
-        0 10px 45px
-        rgba(229,165,47,.22);
-}
-
-.primary:hover {
-    box-shadow:
-        0 15px 60px
-        rgba(242,140,0,.38);
-}
-
-/* NAVBAR JOIN BUTTON */
-.nav-button {
-    color: #080706 !important;
-
-    background:
-        linear-gradient(
-            100deg,
-            #b76b00,
-            #e5a52f,
-            #ffd66b,
-            #f28c00
-        );
-
-    box-shadow:
-        0 8px 30px
-        rgba(229,165,47,.20);
+        text-align: center;
+    }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
+<!-- ======================================================
+     PARTICLES
+======================================================= -->
 
-<div class="background"></div>
-
-<div class="glow one"></div>
-
-<div class="glow two"></div>
-
-<div
-    class="stars"
-    id="stars"
-></div>
+<div id="particles"></div>
 
 
-<!-- =====================================================
+<!-- ======================================================
      NAVIGATION
-===================================================== -->
+======================================================= -->
 
 <nav>
 
     <div class="logo">
-
-        <span>LUREX</span>
-        KINGDOM
-
+        LUREX
     </div>
-
 
     <div class="nav-links">
 
-        <a href="#about">
-            About
+        <a href="#kingdom">
+            KINGDOM
         </a>
 
-        <a href="#rules">
-            Rules
+        <a href="#events">
+            EVENTS
         </a>
 
-        <a href="#owners">
-            Owners
+        <a href="#throne">
+            THRONE ROOM
         </a>
 
-        <a
-            href="https://discord.gg/T2HymyvKr"
-            target="_blank"
-            class="nav-button"
-        >
-            Join Discord
+        <a href="#community">
+            COMMUNITY
         </a>
 
     </div>
+
+    <a
+        href="https://discord.gg/WWnjfh5tB"
+        target="_blank"
+        class="join-nav"
+    >
+        JOIN DISCORD
+    </a>
 
 </nav>
 
 
-<!-- =====================================================
+<!-- ======================================================
      HERO
-===================================================== -->
+======================================================= -->
 
 <section class="hero">
 
+    <div class="hero-orb"></div>
 
-    <div class="hero-left">
+    <div class="hero-content">
 
-
-        <div class="badge">
-
-            LUREX KINGDOM COMMUNITY
-
+        <div class="eyebrow">
+            WELCOME TO THE KINGDOM
         </div>
-
 
         <h1>
-
-            <span class="white">
-                More Than
-            </span>
-
-            <br>
-
-            <span class="gradient">
-                Just A Server
-            </span>
-
-            <br>
-
-            <span class="white">
-                It's A Kingdom.
-            </span>
-
+            LUREX<br>
+            KINGDOM
         </h1>
 
-
-        <p class="hero-description">
-
-            <strong>Lurex Kingdom</strong> is a growing
-            Discord community built for people who want
-            something more than an ordinary server.
-
-            <br><br>
-
-            Hang out with the community, meet new people,
-            play <strong>Roblox and other games</strong>,
-            participate in events, enter giveaways,
-            compete in activities, and enjoy a welcoming
-            environment where everyone can find their place.
-
-            <br><br>
-
-            Whether you're here to game, socialize,
-            compete, or simply chill, your place in
-            <strong>Lurex Kingdom</strong> is waiting.
-
+        <p>
+            A Roblox community where games,
+            giveaways, events and unforgettable
+            moments collide.
+            Step through the gates and discover
+            what Lurex has built.
         </p>
 
-
-        <div class="buttons">
+        <div class="hero-buttons">
 
             <a
-                href="https://discord.gg/T2HymyvKr"
+                href="https://discord.gg/WWnjfh5tB"
                 target="_blank"
-                class="btn primary"
+                class="btn btn-main"
             >
-
-                ✦ Join Lurex Kingdom
-
+                👑 ENTER THE KINGDOM
             </a>
-
 
             <a
-                href="#about"
-                class="btn secondary"
+                href="#kingdom"
+                class="btn btn-secondary"
             >
-
-                Explore Kingdom
-
+                EXPLORE THE KINGDOM ↓
             </a>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =================================================
-         RIGHT HERO
-    ================================================= -->
-
-    <div class="hero-right">
-
-
-        <div class="feature one">
-            🎉 Giveaways
-        </div>
-
-
-        <div class="feature two">
-            🎮 Roblox
-        </div>
-
-
-        <div class="feature three">
-            🏆 Competitions
-        </div>
-
-
-        <div class="feature four">
-            🛡️ Security
-        </div>
-
-
-        <div class="feature five">
-            ⚡ Events
-        </div>
-
-
-        <div
-            class="server-container"
-            id="server"
-        >
-
-            <div class="server-glow"></div>
-
-            <div class="server-ring"></div>
-
-            <div class="server-logo">
-
-                <img
-                    src="lurex-logo.png"
-                    alt="Lurex Kingdom"
-                >
-
-            </div>
 
         </div>
 
@@ -1841,751 +1299,622 @@ footer span {
 </section>
 
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+<!-- ======================================================
+     KINGDOM FEATURES
+======================================================= -->
 
-<section
-    class="section"
-    id="about"
->
+<section id="kingdom">
 
+    <div class="section-header reveal">
 
-    <div class="section-heading">
+        <span>
+            INSIDE LUREX
+        </span>
 
         <h2>
-
-            Welcome To
-
-            <span>
-                Lurex Kingdom
-            </span>
-
+            THE KINGDOM NEVER SLEEPS.
         </h2>
-
-        <p>
-            A community built by its members,
-            for its members.
-        </p>
 
     </div>
 
 
-    <div class="about-grid">
+    <div class="feature-grid">
 
+        <div class="feature reveal">
 
-        <div class="about-card">
+            <div class="feature-icon">
+                🎁
+            </div>
 
             <h3>
-                👑 What Is Lurex Kingdom?
+                Giveaways
             </h3>
 
             <p>
-
-                Lurex Kingdom is a community-focused
-                Discord server created to bring people
-                together through gaming, Roblox,
-                entertainment, events, giveaways,
-                conversations, and friendships.
-
-                <br><br>
-
-                Our goal is to create a place where
-                members can have fun, meet new people,
-                participate in activities, and feel like
-                they are genuinely part of a community.
-
-                <br><br>
-
-                The Kingdom is constantly evolving,
-                with new ideas, events, features,
-                and opportunities being introduced
-                as the community grows.
-
+                Massive community giveaways,
+                special rewards and events
+                happening throughout the kingdom.
             </p>
 
         </div>
 
 
-        <div class="about-highlight">
+        <div class="feature reveal">
 
-
-            <div class="highlight">
-
-                <strong>
-                    🎮 Gaming
-                </strong>
-
-                <span>
-                    Roblox, games and gaming-related
-                    community activities.
-                </span>
-
+            <div class="feature-icon">
+                🎮
             </div>
-
-
-            <div class="highlight">
-
-                <strong>
-                    🎁 Giveaways
-                </strong>
-
-                <span>
-                    Community giveaways and special
-                    rewards.
-                </span>
-
-            </div>
-
-
-            <div class="highlight">
-
-                <strong>
-                    ⚡ Events
-                </strong>
-
-                <span>
-                    Competitions, activities and
-                    community events.
-                </span>
-
-            </div>
-
-
-            <div class="highlight">
-
-                <strong>
-                    👥 Community
-                </strong>
-
-                <span>
-                    Meet people, make friends and
-                    enjoy the Kingdom.
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     DO'S AND DON'TS
-===================================================== -->
-
-<section
-    class="section"
-    id="rules"
->
-
-
-    <div class="section-heading">
-
-        <h2>
-
-            Kingdom
-
-            <span>
-                Guidelines
-            </span>
-
-        </h2>
-
-        <p>
-            Keep Lurex Kingdom enjoyable,
-            welcoming and safe for everyone.
-        </p>
-
-    </div>
-
-
-    <div class="rules-grid">
-
-
-        <!-- DO -->
-
-        <div class="rules-card do">
-
-
-            <div class="rules-title">
-
-                <div class="rules-icon">
-                    ✓
-                </div>
-
-                <h3>
-                    Things To Do
-                </h3>
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✓
-                </span>
-
-                Respect other members and
-                treat everyone fairly.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✓
-                </span>
-
-                Participate in conversations,
-                events and community activities.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✓
-                </span>
-
-                Follow the instructions given
-                by the moderation team.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✓
-                </span>
-
-                Use the correct channels for
-                their intended purposes.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✓
-                </span>
-
-                Report problems or rule violations
-                to the appropriate staff members.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✓
-                </span>
-
-                Help keep the community welcoming
-                and enjoyable for everyone.
-
-            </div>
-
-
-        </div>
-
-
-        <!-- DON'T -->
-
-        <div class="rules-card dont">
-
-
-            <div class="rules-title">
-
-                <div class="rules-icon">
-                    ✕
-                </div>
-
-                <h3>
-                    Things To Avoid
-                </h3>
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✕
-                </span>
-
-                Do not harass, threaten,
-                bully or target other members.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✕
-                </span>
-
-                Do not spam messages, mentions,
-                emojis or unnecessary content.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✕
-                </span>
-
-                Do not advertise without
-                permission from the staff team.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✕
-                </span>
-
-                Do not attempt to scam, deceive
-                or exploit other members.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✕
-                </span>
-
-                Do not intentionally disrupt
-                events or community activities.
-
-            </div>
-
-
-            <div class="rule">
-
-                <span class="rule-symbol">
-                    ✕
-                </span>
-
-                Do not abuse bots, permissions,
-                channels or server features.
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     OWNERS
-===================================================== -->
-
-<section
-    class="section"
-    id="owners"
->
-
-
-    <div class="section-heading">
-
-        <h2>
-
-            Meet The
-
-            <span>
-                Owners
-            </span>
-
-        </h2>
-
-        <p>
-            The team behind Lurex Kingdom.
-        </p>
-
-    </div>
-
-
-    <div class="owner-grid">
-
-
-        <!-- MEOWLY -->
-
-        <div class="owner-card">
-
-
-            <div class="owner-image">
-
-                <img
-                    src="meowly.png"
-                    alt="Meowly"
-                >
-
-            </div>
-
 
             <h3>
-                Meowly
+                Games
             </h3>
 
-
-            <div class="owner-role">
-                Owner
-            </div>
-
-
-            <p class="owner-description">
-
-                One of the owners behind
-                Lurex Kingdom, helping lead
-                the community and shape its
-                future.
-
+            <p>
+                Roblox games, community activities,
+                challenges and events designed
+                to keep everyone involved.
             </p>
-
 
         </div>
 
 
-        <!-- SKYLAR -->
+        <div class="feature reveal">
 
-        <div class="owner-card">
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Events
+            </h3>
+
+            <p>
+                From spontaneous activities to
+                huge community events,
+                there is always something happening.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-            <div class="owner-image">
+<!-- ======================================================
+     EVENTS
+======================================================= -->
 
-                <img
-                    src="skylar.png"
-                    alt="Skylar"
-                >
+<section id="events">
+
+    <div class="section-header reveal">
+
+        <span>
+            THE EXPERIENCE
+        </span>
+
+        <h2>
+            MORE THAN A SERVER.
+        </h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature reveal">
+
+            <div class="feature-icon">
+                🌌
+            </div>
+
+            <h3>
+                A Living Community
+            </h3>
+
+            <p>
+                Meet people, make friends,
+                join conversations and become
+                part of something constantly growing.
+            </p>
+
+        </div>
+
+
+        <div class="feature reveal">
+
+            <div class="feature-icon">
+                💎
+            </div>
+
+            <h3>
+                Exclusive Rewards
+            </h3>
+
+            <p>
+                Take part in activities and
+                discover opportunities available
+                throughout the Lurex community.
+            </p>
+
+        </div>
+
+
+        <div class="feature reveal">
+
+            <div class="feature-icon">
+                🏰
+            </div>
+
+            <h3>
+                The Kingdom
+            </h3>
+
+            <p>
+                Built around Roblox, community
+                and entertainment — Lurex is
+                always expanding.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     THRONE ROOM
+======================================================= -->
+
+<section
+    class="throne-section"
+    id="throne"
+>
+
+    <div class="throne-glow"></div>
+
+
+    <div class="section-header reveal">
+
+        <span>
+            THE PEOPLE BEHIND THE KINGDOM
+        </span>
+
+        <h2>
+            THE THRONE ROOM.
+        </h2>
+
+    </div>
+
+
+    <div class="throne-room">
+
+
+        <!-- ================================
+             FOUNDER 1
+        ================================= -->
+
+        <div class="member reveal">
+
+            <div class="member-visual">
+
+                <div class="member-symbol">
+                    👑
+                </div>
 
             </div>
 
+            <div class="member-role">
+                FOUNDER
+            </div>
 
             <h3>
                 Skylar
             </h3>
 
-
-            <div class="owner-role">
-                Founder
-            </div>
-
-
-            <p class="owner-description">
-
-                Owner of Lurex Kingdom and
-                the <strong>Lurex Roblox Game
-                Developer</strong>, helping
-                develop and build the Lurex
-                gaming experience.
-
+            <p>
+                The architect behind Lurex Kingdom.
+                Built the foundation, shaped the vision
+                and continues to push the kingdom forward.
             </p>
 
+            <div class="member-line"></div>
 
         </div>
 
 
-        <!-- CHEETOZ -->
+        <!-- ================================
+             FOUNDER 2
+        ================================= -->
 
-        <div class="owner-card">
+        <div class="member reveal">
 
+            <div class="member-visual">
 
-            <div class="owner-image">
-
-                <img
-                    src="cheetoz.png"
-                    alt="Cheetoz"
-                >
-
-            </div>
-
-
-            <h3>
-                Cheetoz
-            </h3>
-
-
-            <div class="owner-role">
-                Owner
-            </div>
-
-
-            <p class="owner-description">
-
-                One of the owners of
-                Lurex Kingdom, helping
-                manage the community and
-                contribute to its continued
-                growth.
-
-            </p>
-
-
-        </div>
-
-
-        <!-- DOMINICK -->
-
-        <div class="owner-card">
-
-
-            <div class="owner-image">
-
-                <img
-                    src="dominick_2.png"
-                    alt="Dominick_2"
-                >
+                <div class="member-symbol">
+                    ⚜️
+                </div>
 
             </div>
 
+            <div class="member-role">
+                FOUNDER
+            </div>
 
             <h3>
                 Dominick_2
             </h3>
 
-
-            <div class="owner-role">
-                Founder
-            </div>
-
-
-            <p class="owner-description">
-
-                One of the owners behind
-                Lurex Kingdom, helping
-                manage the server and create
-                a better experience for
-                its members.
-
-            </p>
-
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =================================================
-         BOT OWNER
-    ================================================= -->
-
-    <div class="bot-owner">
-
-
-        <div class="section-heading">
-
-            <h2>
-
-                Meet The
-
-                <span>
-                    Bot Owner
-                </span>
-
-            </h2>
-
             <p>
-                The technology behind the Kingdom.
+                One of the minds responsible for turning
+                Lurex from an idea into a growing kingdom
+                built for the community.
             </p>
+
+            <div class="member-line"></div>
 
         </div>
 
 
-        <div class="bot-card">
+        <!-- ================================
+             BOT OWNER
+        ================================= -->
 
+        <div class="member center reveal">
 
-            <div class="owner-image">
+            <div class="member-visual">
 
-                <img
-                    src="asm.png"
-                    alt="ASM"
-                >
+                <div class="member-symbol">
+                    🤖
+                </div>
 
             </div>
 
+            <div class="member-role">
+                BOT OWNER
+            </div>
 
             <h3>
                 ASM
             </h3>
 
-
-            <div class="owner-role">
-                Bot Owner
-            </div>
-
-
-            <p class="owner-description">
-
-                The owner behind the Lurex Kingdom
-                bot, responsible for developing
-                and maintaining the systems,
-                features and technology that
-                help power the community.
-
+            <p>
+                The engineer behind the systems that
+                power the kingdom — keeping automation,
+                features and the digital side of Lurex alive.
             </p>
 
+            <div class="member-line"></div>
 
         </div>
+
+
+        <!-- ================================
+             OWNER 1
+        ================================= -->
+
+        <div class="member reveal">
+
+            <div class="member-visual">
+
+                <div class="member-symbol">
+                    ⚔️
+                </div>
+
+            </div>
+
+            <div class="member-role">
+                OWNER
+            </div>
+
+            <h3>
+                Cheeto
+            </h3>
+
+            <p>
+                Helps command the kingdom, keeps
+                the community moving and works behind
+                the scenes to keep Lurex evolving.
+            </p>
+
+            <div class="member-line"></div>
+
+        </div>
+
+
+        <!-- ================================
+             OWNER 2
+        ================================= -->
+
+        <div class="member reveal">
+
+            <div class="member-visual">
+
+                <div class="member-symbol">
+                    🛡️
+                </div>
+
+            </div>
+
+            <div class="member-role">
+                OWNER
+            </div>
+
+            <h3>
+                Meowly
+            </h3>
+
+            <p>
+                Part of the leadership keeping the
+                kingdom organized, active and ready
+                for whatever comes next.
+            </p>
+
+            <div class="member-line"></div>
+
+        </div>
+
 
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     FINAL CTA
-===================================================== -->
+<!-- ======================================================
+     DISCORD CTA
+======================================================= -->
 
-<section class="cta">
+<section
+    class="discord-section"
+    id="community"
+>
 
+    <div class="discord-box reveal">
 
-    <h2>
+        <h2>
+            THE GATES ARE OPEN.
+        </h2>
 
-        Ready To Enter
+        <p>
+            Giveaways. Games. Events.
+            Community. Chaos.
+            Everything is waiting inside Lurex Kingdom.
+        </p>
 
-        <span>
-            The Kingdom?
-        </span>
+        <a
+            href="https://discord.gg/WWnjfh5tB"
+            target="_blank"
+            class="btn btn-main"
+        >
+            👑 JOIN LUREX KINGDOM
+        </a>
 
-    </h2>
-
-
-    <p>
-
-        Join Lurex Kingdom today and become
-        part of a growing community built
-        around gaming, events, friendships
-        and unforgettable moments.
-
-    </p>
-
-
-    <a
-        href="https://discord.gg/T2HymyvKr"
-        target="_blank"
-        class="btn primary"
-    >
-
-        ✦ Join Lurex Kingdom
-
-    </a>
-
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- ======================================================
      FOOTER
-===================================================== -->
+======================================================= -->
 
 <footer>
 
-    © 2026
+    <div>
+        © 2026 LUREX KINGDOM
+    </div>
 
-    <span>
-        Lurex Kingdom
-    </span>
-
-    — All rights reserved.
+    <div>
+        BUILT BEYOND THE ORDINARY.
+    </div>
 
 </footer>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
 
+/* =========================================================
+   PARTICLE SYSTEM
+========================================================= */
 
-/* =====================================================
-   GOLD PARTICLES
-===================================================== */
-
-const stars =
-    document.getElementById("stars");
-
+const particleContainer =
+    document.getElementById("particles");
 
 for (
     let i = 0;
-    i < 120;
+    i < 100;
     i++
 ) {
 
-    const star =
+    const particle =
         document.createElement("div");
 
-    star.classList.add("star");
+    particle.className =
+        "particle";
 
-    star.style.left =
+    particle.style.left =
         Math.random() * 100 + "%";
 
-    star.style.top =
+    particle.style.top =
         Math.random() * 100 + "%";
 
-    star.style.animationDelay =
-        Math.random() * 5 + "s";
+    particle.style.setProperty(
+        "--x",
+        (
+            Math.random() * 200 - 100
+        ) + "px"
+    );
 
-    stars.appendChild(star);
+    particle.style.setProperty(
+        "--duration",
+        (
+            5 + Math.random() * 8
+        ) + "s"
+    );
+
+    particle.style.animationDelay =
+        (
+            Math.random() * 8
+        ) + "s";
+
+    particleContainer.appendChild(
+        particle
+    );
 }
 
 
-/* =====================================================
-   CENTER LOGO PARALLAX
-===================================================== */
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
 
-const server =
-    document.getElementById("server");
+const observer =
+    new IntersectionObserver(
 
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold: .12
+        }
+
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(
+        element =>
+            observer.observe(element)
+    );
+
+
+/* =========================================================
+   3D MEMBER TILT
+========================================================= */
+
+document
+    .querySelectorAll(".member")
+    .forEach(card => {
+
+        card.addEventListener(
+            "mousemove",
+            event => {
+
+                const rect =
+                    card.getBoundingClientRect();
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+                const rotateY =
+                    (
+                        rect.width / 2 -
+                        x
+                    ) / 15;
+
+                const rotateX =
+                    (
+                        y -
+                        rect.height / 2
+                    ) / 15;
+
+                card.style.transform =
+                    `
+                    perspective(900px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-10px)
+                    scale(1.02)
+                    `;
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                if (
+                    card.classList.contains(
+                        "center"
+                    )
+                ) {
+
+                    card.style.transform =
+                        "translateY(-25px)";
+
+                } else {
+
+                    card.style.transform =
+                        "";
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const orb =
+    document.querySelector(".hero-orb");
 
 document.addEventListener(
     "mousemove",
-    (event) => {
+    event => {
 
         const x =
             (
-                event.clientX /
-                window.innerWidth
-                - .5
-            ) * 25;
+                window.innerWidth / 2 -
+                event.clientX
+            ) / 35;
 
         const y =
             (
-                event.clientY /
-                window.innerHeight
-                - .5
-            ) * 25;
+                window.innerHeight / 2 -
+                event.clientY
+            ) / 35;
 
-        server.style.transform =
-            `translate(${x}px, ${y}px)`;
+        orb.style.transform =
+            `
+            translate(
+                ${x}px,
+                ${y}px
+            )
+            `;
+
     }
 );
 
 </script>
 
-
 </body>
-
 </html>
+```
