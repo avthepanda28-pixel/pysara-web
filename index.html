@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LUREX KINGDOM — The Golden Realm</title>
+<title>Lurex Kingdom — Enter The Realm</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+    --gold: #d4a83d;
+    --gold-light: #ffe6a0;
+    --gold-bright: #fff1bd;
+    --gold-dark: #765313;
+
+    --black: #040302;
+    --black-2: #090704;
+    --panel: rgba(255, 220, 130, .035);
+
+    --text: #eee3c7;
+    --muted: #8d826b;
+
+    --border: rgba(216, 173, 70, .16);
+}
+
 
 /* =========================================================
    RESET
@@ -29,49 +50,96 @@ html {
 }
 
 body {
-    background: #050403;
-    color: #f8edcf;
-    overflow-x: hidden;
+    background: var(--black);
+    color: var(--text);
     font-family: Inter, sans-serif;
-    cursor: default;
+    overflow-x: hidden;
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 ::selection {
-    background: #d6a936;
-    color: #100c03;
+    background: var(--gold);
+    color: #080602;
 }
 
 
 /* =========================================================
-   GOLD VARIABLES
+   AMBIENT BACKGROUND
 ========================================================= */
 
-:root {
-    --gold: #d8ad46;
-    --gold-light: #ffe8a0;
-    --gold-dark: #80601d;
-    --black: #050403;
-    --cream: #f8edcf;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 10%,
+            rgba(193, 145, 42, .15),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 0% 70%,
+            rgba(120, 80, 15, .09),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 100% 70%,
+            rgba(120, 80, 15, .08),
+            transparent 35%
+        ),
+
+        #040302;
+}
+
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -9;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 220, 130, .018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 220, 130, .018) 1px,
+            transparent 1px
+        );
+
+    background-size: 90px 90px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
 }
 
 
 /* =========================================================
-   ANIMATED GOLD DUST
+   GOLD DUST
 ========================================================= */
 
-#goldDust {
+#dust {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 100;
 }
 
-.gold-particle {
+.dust {
     position: absolute;
 
     width: 2px;
@@ -79,25 +147,25 @@ a {
 
     border-radius: 50%;
 
-    background: #f5d77a;
+    background: var(--gold-light);
 
     box-shadow:
-        0 0 6px #e8bd52,
-        0 0 15px rgba(226,176,62,.5);
-
-    animation:
-        dustFloat
-        var(--time)
-        infinite ease-in-out;
+        0 0 7px var(--gold),
+        0 0 15px rgba(216, 173, 70, .5);
 
     opacity: 0;
+
+    animation:
+        dustRise
+        var(--duration)
+        infinite ease-in-out;
 }
 
-@keyframes dustFloat {
+@keyframes dustRise {
 
     0% {
         transform:
-            translate3d(0,40px,0)
+            translate3d(0, 30px, 0)
             scale(.4);
 
         opacity: 0;
@@ -108,12 +176,12 @@ a {
     }
 
     80% {
-        opacity: .4;
+        opacity: .3;
     }
 
     100% {
         transform:
-            translate3d(var(--x),-180px,0)
+            translate3d(var(--x), -180px, 0)
             scale(1.3);
 
         opacity: 0;
@@ -122,14 +190,14 @@ a {
 
 
 /* =========================================================
-   GOLDEN MOUSE AURA
+   MOUSE LIGHT
 ========================================================= */
 
-#mouseGlow {
+#mouseLight {
     position: fixed;
 
-    width: 280px;
-    height: 280px;
+    width: 300px;
+    height: 300px;
 
     border-radius: 50%;
 
@@ -137,144 +205,35 @@ a {
 
     z-index: 90;
 
+    transform:
+        translate(-50%, -50%);
+
     background:
         radial-gradient(
             circle,
-            rgba(224,179,67,.12),
+            rgba(222, 177, 67, .11),
             transparent 65%
         );
-
-    transform:
-        translate(-50%,-50%);
-
-    mix-blend-mode: screen;
 }
 
 
 /* =========================================================
-   VIGNETTE
-========================================================= */
-
-.vignette {
-    position: fixed;
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 80;
-
-    box-shadow:
-        inset 0 0 180px 60px #000;
-}
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: -5;
-
-    background:
-
-        radial-gradient(
-            ellipse at 50% 25%,
-            rgba(155,111,32,.16),
-            transparent 38%
-        ),
-
-        radial-gradient(
-            ellipse at 15% 80%,
-            rgba(110,75,18,.08),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            ellipse at 85% 70%,
-            rgba(110,75,18,.08),
-            transparent 30%
-        ),
-
-        #050403;
-}
-
-
-/* =========================================================
-   STARS
-========================================================= */
-
-#stars {
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: -4;
-}
-
-.star {
-    position: absolute;
-
-    width: 1px;
-    height: 1px;
-
-    background: #fff5c7;
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 7px #dcb452;
-
-    opacity: .5;
-
-    animation:
-        starPulse
-        var(--duration)
-        infinite ease-in-out;
-}
-
-@keyframes starPulse {
-
-    0%,100% {
-        opacity: .15;
-    }
-
-    50% {
-        opacity: .8;
-    }
-}
-
-
-/* =========================================================
-   NAV
+   NAVIGATION
 ========================================================= */
 
 nav {
-
     position: fixed;
 
     top: 0;
     left: 0;
 
     width: 100%;
+    height: 78px;
 
-    height: 80px;
-
-    padding:
-        0 6%;
+    padding: 0 6%;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     z-index: 1000;
@@ -282,53 +241,49 @@ nav {
     background:
         linear-gradient(
             to bottom,
-            rgba(5,4,2,.92),
-            rgba(5,4,2,.4)
+            rgba(4,3,1,.95),
+            rgba(4,3,1,.45)
         );
 
-    backdrop-filter:
-        blur(14px);
+    backdrop-filter: blur(18px);
 
     border-bottom:
         1px solid
-        rgba(216,173,70,.13);
+        rgba(216,173,70,.12);
 }
 
 .logo {
-
     font-family: Cinzel, serif;
 
-    font-size: 17px;
+    font-size: 18px;
+
+    font-weight: 800;
 
     letter-spacing: 7px;
 
     color: var(--gold-light);
 
     text-shadow:
-        0 0 20px
+        0 0 25px
         rgba(216,173,70,.3);
 }
 
 .nav-links {
-
     display: flex;
-
-    gap: 35px;
+    gap: 28px;
 }
 
 .nav-links a {
-
-    color: #8d8266;
+    color: #81765f;
 
     font-size: 9px;
 
     letter-spacing: 2px;
 
-    transition: .4s;
+    transition: .3s;
 }
 
 .nav-links a:hover {
-
     color: var(--gold-light);
 
     text-shadow:
@@ -336,474 +291,67 @@ nav {
         rgba(216,173,70,.6);
 }
 
-.nav-join {
-
+.nav-button {
     padding:
         11px 18px;
 
     border:
         1px solid
-        rgba(216,173,70,.4);
+        rgba(216,173,70,.35);
 
-    color:
-        var(--gold-light);
+    color: var(--gold-light);
 
     font-family: Cinzel, serif;
 
-    font-size: 9px;
+    font-size: 8px;
 
     letter-spacing: 2px;
-
-    position: relative;
-
-    overflow: hidden;
 
     transition: .4s;
 }
 
-.nav-join::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    transform:
-        translateX(-110%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,220,130,.15),
-            transparent
-        );
-
-    transition: .5s;
-}
-
-.nav-join:hover::before {
-
-    transform:
-        translateX(110%);
-}
-
-.nav-join:hover {
-
+.nav-button:hover {
     border-color:
         var(--gold-light);
 
     box-shadow:
-        0 0 25px
-        rgba(216,173,70,.18);
+        0 0 30px
+        rgba(216,173,70,.15);
 }
 
 
 /* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-
-    min-height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.hero-content {
-
-    position: relative;
-
-    z-index: 10;
-
-    margin-top: 50px;
-}
-
-
-/* =========================================================
-   GOLDEN PORTAL
-========================================================= */
-
-.portal {
-
-    position: absolute;
-
-    width: 650px;
-    height: 650px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(216,173,70,.16);
-
-    box-shadow:
-
-        0 0 60px
-        rgba(216,173,70,.08),
-
-        inset 0 0 100px
-        rgba(216,173,70,.04);
-
-    animation:
-        portalRotate
-        35s
-        linear
-        infinite;
-}
-
-.portal::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 45px;
-
-    border-radius: 50%;
-
-    border:
-        1px dashed
-        rgba(216,173,70,.25);
-
-    animation:
-        portalRotateReverse
-        18s
-        linear
-        infinite;
-}
-
-.portal::after {
-
-    content: "✦";
-
-    position: absolute;
-
-    top: -18px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    color:
-        var(--gold-light);
-
-    font-size: 25px;
-
-    text-shadow:
-        0 0 25px
-        var(--gold);
-}
-
-@keyframes portalRotate {
-
-    from {
-        transform:
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-@keyframes portalRotateReverse {
-
-    from {
-        transform:
-            rotate(360deg);
-    }
-
-    to {
-        transform:
-            rotate(0deg);
-    }
-}
-
-
-/* =========================================================
-   HERO TEXT
-========================================================= */
-
-.royal-eyebrow {
-
-    font-family: Cinzel, serif;
-
-    font-size: 10px;
-
-    letter-spacing: 7px;
-
-    color:
-        #a99463;
-
-    margin-bottom: 30px;
-
-    opacity: .9;
-}
-
-.hero h1 {
-
-    font-family: Cinzel, serif;
-
-    font-weight: 800;
-
-    font-size:
-        clamp(
-            55px,
-            10vw,
-            140px
-        );
-
-    line-height: .8;
-
-    letter-spacing:
-        -4px;
-
-    color:
-        var(--gold-light);
-
-    text-shadow:
-
-        0 1px 0 #765414,
-
-        0 2px 0 #63470f,
-
-        0 3px 0 #4c350a,
-
-        0 0 35px
-        rgba(216,173,70,.22);
-
-    animation:
-        royalGlow
-        4s
-        infinite ease-in-out;
-}
-
-@keyframes royalGlow {
-
-    0%,100% {
-        text-shadow:
-            0 1px 0 #765414,
-            0 2px 0 #63470f,
-            0 3px 0 #4c350a,
-            0 0 30px
-            rgba(216,173,70,.15);
-    }
-
-    50% {
-        text-shadow:
-            0 1px 0 #765414,
-            0 2px 0 #63470f,
-            0 3px 0 #4c350a,
-            0 0 60px
-            rgba(216,173,70,.38);
-    }
-}
-
-.hero-sub {
-
-    max-width: 650px;
-
-    margin:
-        35px auto;
-
-    color:
-        #8f876f;
-
-    font-size: 12px;
-
-    line-height: 2;
-
-    letter-spacing: .5px;
-}
-
-
-/* =========================================================
-   HERO BUTTON
-========================================================= */
-
-.royal-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding:
-        17px 30px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(238,204,116,.55);
-
-    background:
-        linear-gradient(
-            135deg,
-            #9c741d,
-            #e2bd55,
-            #806019
-        );
-
-    color:
-        #170f02;
-
-    font-family:
-        Cinzel,
-        serif;
-
-    font-weight: 800;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    box-shadow:
-        0 0 35px
-        rgba(216,173,70,.2);
-
-    transition: .5s;
-}
-
-.royal-button::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-
-    left: -100%;
-
-    width: 60%;
-
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.55),
-            transparent
-        );
-
-    transform:
-        skewX(-20deg);
-
-    transition:
-        .7s;
-}
-
-.royal-button:hover::before {
-
-    left: 150%;
-}
-
-.royal-button:hover {
-
-    transform:
-        translateY(-5px);
-
-    box-shadow:
-        0 10px 45px
-        rgba(216,173,70,.35);
-}
-
-
-/* =========================================================
-   ROYAL DIVIDER
-========================================================= */
-
-.divider {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    margin:
-        40px auto;
-
-    color:
-        var(--gold);
-}
-
-.divider::before,
-.divider::after {
-
-    content: "";
-
-    height: 1px;
-
-    width: 120px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(216,173,70,.5)
-        );
-}
-
-.divider::after {
-
-    transform:
-        rotate(180deg);
-}
-
-
-/* =========================================================
-   SECTIONS
+   GENERAL SECTIONS
 ========================================================= */
 
 section {
+    position: relative;
 
     padding:
-        150px 7%;
-
-    position: relative;
+        140px 7%;
 }
 
-.section-title {
+.section-heading {
+    max-width: 850px;
+
+    margin:
+        0 auto 70px;
 
     text-align: center;
-
-    margin-bottom: 80px;
 }
 
-.section-title .small {
+.section-kicker {
+    color: #ae8b43;
 
     font-family: Cinzel, serif;
 
     font-size: 9px;
 
     letter-spacing: 5px;
-
-    color:
-        #a99463;
 }
 
-.section-title h2 {
+.section-heading h2 {
+    margin-top: 14px;
 
     font-family: Cinzel, serif;
 
@@ -814,21 +362,523 @@ section {
             70px
         );
 
-    color:
-        var(--gold-light);
+    line-height: .95;
 
-    margin-top: 15px;
+    color: var(--gold-light);
+}
 
-    font-weight: 700;
+.section-heading p {
+    margin:
+        25px auto 0;
+
+    max-width: 650px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 2;
 }
 
 
 /* =========================================================
-   RELIC CARDS
+   HERO
 ========================================================= */
 
-.relic-grid {
+.hero {
+    min-height: 100vh;
 
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    padding-top: 100px;
+}
+
+.hero-ring {
+    position: absolute;
+
+    width: min(720px, 90vw);
+    height: min(720px, 90vw);
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(216,173,70,.14);
+
+    box-shadow:
+        0 0 80px
+        rgba(216,173,70,.04),
+
+        inset 0 0 80px
+        rgba(216,173,70,.04);
+
+    animation:
+        spin 35s linear infinite;
+}
+
+.hero-ring::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 50px;
+
+    border:
+        1px dashed
+        rgba(216,173,70,.23);
+
+    border-radius: 50%;
+}
+
+.hero-ring::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: -15px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        var(--gold-light);
+
+    font-size: 24px;
+
+    text-shadow:
+        0 0 25px var(--gold);
+}
+
+@keyframes spin {
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-kicker {
+    font-family: Cinzel, serif;
+
+    font-size: 10px;
+
+    letter-spacing: 7px;
+
+    color: #aa8a4b;
+
+    margin-bottom: 28px;
+}
+
+.hero h1 {
+    font-family: Cinzel, serif;
+
+    font-size:
+        clamp(
+            60px,
+            11vw,
+            150px
+        );
+
+    line-height: .8;
+
+    letter-spacing: -5px;
+
+    color: var(--gold-light);
+
+    text-shadow:
+        0 2px 0 #795714,
+        0 4px 0 #4e360c,
+        0 0 50px
+        rgba(216,173,70,.25);
+
+    animation:
+        royalPulse 5s infinite ease-in-out;
+}
+
+@keyframes royalPulse {
+
+    50% {
+        text-shadow:
+            0 2px 0 #795714,
+            0 4px 0 #4e360c,
+            0 0 80px
+            rgba(216,173,70,.45);
+    }
+}
+
+.hero-divider {
+    margin:
+        35px auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    color:
+        var(--gold);
+}
+
+.hero-divider span {
+    width: 100px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold)
+        );
+}
+
+.hero-divider span:last-child {
+    transform:
+        rotate(180deg);
+}
+
+.hero p {
+    max-width: 650px;
+
+    margin:
+        0 auto 35px;
+
+    color:
+        #89806c;
+
+    font-size: 12px;
+
+    line-height: 2;
+}
+
+.gold-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        16px 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8e691d,
+            #e1bb57,
+            #795714
+        );
+
+    border:
+        1px solid
+        #f0cf76;
+
+    color:
+        #160f03;
+
+    font-family:
+        Cinzel, serif;
+
+    font-weight: 800;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 0 35px
+        rgba(216,173,70,.2);
+
+    transition: .4s;
+}
+
+.gold-button:hover {
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 12px 50px
+        rgba(216,173,70,.35);
+}
+
+
+/* =========================================================
+   SERVER INTRO
+========================================================= */
+
+.intro-grid {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    gap: 30px;
+}
+
+.lore-panel {
+    padding: 45px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(216,173,70,.06),
+            rgba(255,255,255,.01)
+        );
+}
+
+.lore-panel h3 {
+    font-family: Cinzel, serif;
+
+    color: var(--gold-light);
+
+    font-size: 28px;
+
+    margin-bottom: 22px;
+}
+
+.lore-panel p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 2.1;
+
+    margin-bottom: 15px;
+}
+
+.lore-quote {
+    margin-top: 30px;
+
+    padding:
+        20px;
+
+    border-left:
+        2px solid
+        var(--gold);
+
+    color:
+        #bda76e;
+
+    font-family:
+        Cinzel, serif;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+.stat-stack {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+}
+
+.stat {
+    min-height: 145px;
+
+    padding: 25px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        var(--panel);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.stat-number {
+    font-family: Cinzel, serif;
+
+    font-size: 32px;
+
+    color:
+        var(--gold-light);
+
+    margin-bottom: 7px;
+}
+
+.stat-label {
+    color:
+        #776e5c;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   WHAT IS LUREX
+========================================================= */
+
+.realm-grid {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.realm-card {
+    min-height: 290px;
+
+    padding: 35px 30px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(216,173,70,.055),
+            rgba(255,255,255,.01)
+        );
+
+    transition:
+        .5s;
+}
+
+.realm-card:hover {
+    transform:
+        translateY(-10px);
+
+    border-color:
+        rgba(216,173,70,.45);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.4),
+
+        0 0 35px
+        rgba(216,173,70,.07);
+}
+
+.realm-icon {
+    font-size: 32px;
+
+    margin-bottom: 25px;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(216,173,70,.4)
+        );
+}
+
+.realm-card h3 {
+    font-family: Cinzel, serif;
+
+    color:
+        var(--gold-light);
+
+    font-size: 20px;
+
+    margin-bottom: 15px;
+}
+
+.realm-card p {
+    color:
+        var(--muted);
+
+    font-size: 11px;
+
+    line-height: 2;
+}
+
+
+/* =========================================================
+   TREASURY
+========================================================= */
+
+.treasury {
+    overflow: hidden;
+}
+
+.treasury::before {
+    content: "✦";
+
+    position: absolute;
+
+    left: 10%;
+    top: 30%;
+
+    font-size: 100px;
+
+    color:
+        rgba(216,173,70,.035);
+
+    animation:
+        float 6s infinite ease-in-out;
+}
+
+.treasury::after {
+    content: "✦";
+
+    position: absolute;
+
+    right: 10%;
+    bottom: 20%;
+
+    font-size: 150px;
+
+    color:
+        rgba(216,173,70,.025);
+
+    animation:
+        float 8s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+
+    50% {
+        transform:
+            translateY(-30px)
+            rotate(10deg);
+    }
+}
+
+.treasure-grid {
     max-width: 1100px;
 
     margin: auto;
@@ -841,150 +891,196 @@ section {
     gap: 20px;
 }
 
-.relic {
-
-    min-height: 300px;
-
-    position: relative;
-
-    overflow: hidden;
+.treasure {
+    text-align: center;
 
     padding:
-        40px 30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(216,173,70,.055),
-            rgba(255,255,255,.015)
-        );
+        45px 25px;
 
     border:
         1px solid
-        rgba(216,173,70,.13);
-
-    transition:
-        .5s;
-
-    clip-path:
-        polygon(
-            0 14px,
-            14px 0,
-            calc(100% - 14px) 0,
-            100% 14px,
-            100% calc(100% - 14px),
-            calc(100% - 14px) 100%,
-            14px 100%,
-            0 calc(100% - 14px)
-        );
-}
-
-.relic::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 160px;
-    height: 160px;
-
-    border-radius: 50%;
-
-    top: -80px;
-    right: -80px;
+        var(--border);
 
     background:
-        rgba(216,173,70,.12);
-
-    filter:
-        blur(50px);
+        rgba(255,220,130,.025);
 
     transition: .5s;
 }
 
-.relic:hover {
-
+.treasure:hover {
     transform:
-        translateY(-12px);
+        scale(1.025);
 
     border-color:
-        rgba(216,173,70,.4);
-
-    box-shadow:
-        0 25px 60px
-        rgba(0,0,0,.45),
-
-        0 0 45px
-        rgba(216,173,70,.08);
+        rgba(216,173,70,.45);
 }
 
-.relic:hover::before {
+.treasure-symbol {
+    font-size: 50px;
 
-    transform:
-        scale(1.5);
-
-    opacity: .7;
+    margin-bottom: 20px;
 }
 
-.relic-icon {
-
-    font-size: 32px;
-
-    margin-bottom: 25px;
-
-    filter:
-        drop-shadow(
-            0 0 15px
-            rgba(216,173,70,.4)
-        );
-}
-
-.relic h3 {
-
+.treasure h3 {
     font-family: Cinzel, serif;
-
-    font-size: 20px;
 
     color:
         var(--gold-light);
 
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-.relic p {
-
+.treasure p {
     color:
-        #817966;
+        var(--muted);
 
-    font-size: 11px;
+    font-size: 10px;
 
-    line-height: 2;
+    line-height: 1.9;
 }
 
 
 /* =========================================================
-   THRONE ROOM
+   ACTIVITIES
 ========================================================= */
 
-#throne {
+.activity-list {
+    max-width: 1000px;
 
-    min-height: 100vh;
+    margin: auto;
+}
 
-    display: flex;
+.activity {
+    display: grid;
 
-    flex-direction: column;
+    grid-template-columns:
+        90px 1fr auto;
 
-    justify-content: center;
+    align-items: center;
+
+    gap: 25px;
+
+    padding:
+        25px 0;
+
+    border-bottom:
+        1px solid
+        rgba(216,173,70,.1);
+
+    transition: .4s;
+}
+
+.activity:hover {
+    padding-left: 15px;
+
+    border-color:
+        rgba(216,173,70,.35);
+}
+
+.activity-number {
+    font-family: Cinzel, serif;
+
+    font-size: 28px;
+
+    color:
+        rgba(216,173,70,.3);
+}
+
+.activity h3 {
+    font-family: Cinzel, serif;
+
+    color:
+        var(--gold-light);
+
+    font-size: 17px;
+
+    margin-bottom: 7px;
+}
+
+.activity p {
+    color:
+        var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+.activity-tag {
+    padding:
+        8px 12px;
+
+    border:
+        1px solid
+        rgba(216,173,70,.2);
+
+    color:
+        #aa8a4b;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map-section {
+    overflow: hidden;
+}
+
+.kingdom-map {
+    max-width: 1000px;
+
+    height: 520px;
+
+    margin: auto;
+
+    position: relative;
+
+    border:
+        1px solid
+        rgba(216,173,70,.22);
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(216,173,70,.09),
+            transparent 45%
+        ),
+
+        rgba(216,173,70,.015);
 
     overflow: hidden;
 }
 
-.throne-background {
-
+.map-grid {
     position: absolute;
 
-    width: 900px;
-    height: 900px;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(216,173,70,.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(216,173,70,.04) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        50px 50px;
+}
+
+.map-ring {
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
 
     left: 50%;
     top: 50%;
@@ -992,202 +1088,138 @@ section {
     transform:
         translate(-50%,-50%);
 
-    border-radius: 50%;
+    border:
+        1px dashed
+        rgba(216,173,70,.25);
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(216,173,70,.08),
-            transparent 60%
-        );
+    border-radius: 50%;
 }
 
+.map-core {
+    position: absolute;
 
-/* =========================================================
-   THRONE
-========================================================= */
+    left: 50%;
+    top: 50%;
 
-.throne {
+    transform:
+        translate(-50%,-50%);
 
-    position: relative;
+    width: 110px;
+    height: 110px;
 
-    width: 280px;
-    height: 300px;
-
-    margin:
-        0 auto 70px;
+    border-radius: 50%;
 
     display: flex;
 
     align-items: center;
 
     justify-content: center;
-}
 
-.throne-back {
-
-    position: absolute;
-
-    width: 190px;
-    height: 250px;
-
-    border:
-        2px solid
-        rgba(216,173,70,.45);
-
-    border-bottom: none;
-
-    border-radius:
-        90px 90px 15px 15px;
+    text-align: center;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(140,100,28,.15),
-            rgba(20,14,5,.6)
-        );
-
-    box-shadow:
-        inset 0 0 50px
-        rgba(216,173,70,.08),
-
-        0 0 40px
-        rgba(216,173,70,.08);
-}
-
-.throne-back::before {
-
-    content: "♛";
-
-    position: absolute;
-
-    left: 50%;
-    top: 45%;
-
-    transform:
-        translate(-50%,-50%);
-
-    font-size: 110px;
-
-    font-family: serif;
-
-    color:
-        rgba(216,173,70,.22);
-
-    text-shadow:
-        0 0 30px
-        rgba(216,173,70,.3);
-}
-
-.throne-seat {
-
-    position: absolute;
-
-    bottom: 20px;
-
-    width: 230px;
-    height: 80px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #8a641c,
-            #d5aa42,
-            #765315
-        );
-
-    border:
-        2px solid
-        #e6c467;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.5),
-
-        0 0 30px
-        rgba(216,173,70,.15);
-}
-
-.throne-arm-left,
-.throne-arm-right {
-
-    position: absolute;
-
-    width: 45px;
-    height: 100px;
-
-    bottom: 25px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #725015,
-            #d1a33b,
-            #765315
+        radial-gradient(
+            circle,
+            #6f5117,
+            #161005
         );
 
     border:
         1px solid
         #d9b451;
-}
-
-.throne-arm-left {
-
-    left: 5px;
-
-    transform:
-        skewY(-8deg);
-}
-
-.throne-arm-right {
-
-    right: 5px;
-
-    transform:
-        skewY(8deg);
-}
-
-.throne-crown {
-
-    position: absolute;
-
-    top: -65px;
 
     color:
         var(--gold-light);
 
-    font-size: 50px;
+    font-family: Cinzel, serif;
 
-    text-shadow:
-        0 0 30px
-        rgba(216,173,70,.7);
+    font-size: 10px;
 
-    animation:
-        crownFloat
-        3s
-        infinite ease-in-out;
+    box-shadow:
+        0 0 50px
+        rgba(216,173,70,.25);
 }
 
-@keyframes crownFloat {
+.map-point {
+    position: absolute;
 
-    0%,100% {
-        transform:
-            translateY(0);
-    }
+    width: 130px;
 
-    50% {
-        transform:
-            translateY(-10px);
-    }
+    padding: 15px;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(216,173,70,.2);
+
+    background:
+        rgba(5,4,2,.8);
+
+    backdrop-filter:
+        blur(10px);
+
+    transition: .4s;
+}
+
+.map-point:hover {
+    transform:
+        scale(1.08);
+
+    border-color:
+        var(--gold);
+
+    box-shadow:
+        0 0 30px
+        rgba(216,173,70,.12);
+}
+
+.map-point strong {
+    display: block;
+
+    font-family: Cinzel, serif;
+
+    color:
+        var(--gold-light);
+
+    font-size: 10px;
+
+    margin-bottom: 5px;
+}
+
+.map-point span {
+    color:
+        #746b58;
+
+    font-size: 7px;
+}
+
+.point-1 {
+    top: 70px;
+    left: 20%;
+}
+
+.point-2 {
+    top: 90px;
+    right: 18%;
+}
+
+.point-3 {
+    bottom: 70px;
+    left: 18%;
+}
+
+.point-4 {
+    bottom: 60px;
+    right: 20%;
 }
 
 
 /* =========================================================
-   ROYAL FAMILY
+   ROYAL COURT
 ========================================================= */
 
 .royal-grid {
-
     max-width: 1200px;
 
     margin: auto;
@@ -1200,100 +1232,59 @@ section {
     gap: 12px;
 }
 
-.royal-card {
-
-    min-height: 410px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    padding:
-        28px 20px;
-
-    background:
-        linear-gradient(
-            155deg,
-            rgba(216,173,70,.08),
-            rgba(255,255,255,.01)
-        );
+.royal {
+    min-height: 420px;
 
     border:
         1px solid
-        rgba(216,173,70,.18);
-
-    transition:
-        .6s
-        cubic-bezier(
-            .2,.8,.2,1
-        );
-}
-
-.royal-card:nth-child(3) {
-
-    transform:
-        translateY(-25px);
+        var(--border);
 
     background:
         linear-gradient(
             155deg,
-            rgba(216,173,70,.13),
-            rgba(255,255,255,.015)
+            rgba(216,173,70,.06),
+            rgba(255,255,255,.01)
         );
 
+    padding: 20px;
+
+    transition:
+        .5s;
+}
+
+.royal:hover {
+    transform:
+        translateY(-13px);
+
     border-color:
-        rgba(216,173,70,.4);
+        rgba(216,173,70,.5);
 
     box-shadow:
         0 30px 70px
-        rgba(0,0,0,.5),
-
-        0 0 40px
-        rgba(216,173,70,.08);
+        rgba(0,0,0,.45);
 }
 
-.royal-card:hover {
-
+.royal:nth-child(3) {
     transform:
-        translateY(-15px)
-        scale(1.025);
+        translateY(-25px);
 
     border-color:
-        rgba(255,222,130,.65);
-
-    box-shadow:
-        0 30px 70px
-        rgba(0,0,0,.5),
-
-        0 0 50px
-        rgba(216,173,70,.14);
+        rgba(216,173,70,.35);
 }
 
-.royal-card:nth-child(3):hover {
-
+.royal:nth-child(3):hover {
     transform:
-        translateY(-35px)
-        scale(1.03);
+        translateY(-38px);
 }
 
-
-/* =========================================================
-   PORTRAIT
-========================================================= */
-
-.portrait {
-
-    height: 180px;
+.royal-portrait {
+    height: 190px;
 
     display: flex;
 
     align-items: center;
 
     justify-content: center;
-
-    position: relative;
-
-    margin-bottom: 25px;
 
     background:
         radial-gradient(
@@ -1305,22 +1296,19 @@ section {
     border-bottom:
         1px solid
         rgba(216,173,70,.12);
+
+    margin-bottom: 22px;
 }
 
 .portrait-ring {
-
-    width: 110px;
-    height: 110px;
-
-    border-radius: 50%;
+    width: 115px;
+    height: 115px;
 
     border:
         1px solid
-        rgba(216,173,70,.4);
+        rgba(216,173,70,.45);
 
-    box-shadow:
-        0 0 35px
-        rgba(216,173,70,.15);
+    border-radius: 50%;
 
     display: flex;
 
@@ -1330,102 +1318,70 @@ section {
 
     font-size: 45px;
 
-    position: relative;
+    box-shadow:
+        0 0 35px
+        rgba(216,173,70,.12);
 
     animation:
-        portraitSpin
-        12s
-        linear
-        infinite;
+        portraitGlow
+        4s infinite ease-in-out;
 }
 
-@keyframes portraitSpin {
-
-    from {
-        box-shadow:
-            0 0 20px
-            rgba(216,173,70,.1);
-    }
+@keyframes portraitGlow {
 
     50% {
         box-shadow:
-            0 0 45px
+            0 0 55px
             rgba(216,173,70,.3);
-    }
-
-    to {
-        box-shadow:
-            0 0 20px
-            rgba(216,173,70,.1);
     }
 }
 
 .role {
-
-    font-family:
-        Cinzel,
-        serif;
-
-    font-size: 8px;
+    font-size: 7px;
 
     letter-spacing: 3px;
 
     color:
-        #b99a51;
+        #a7894b;
 
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 }
 
-.royal-card h3 {
-
+.royal h3 {
     font-family:
-        Cinzel,
-        serif;
-
-    font-size: 18px;
+        Cinzel, serif;
 
     color:
         var(--gold-light);
 
-    margin-bottom: 14px;
+    font-size: 18px;
+
+    margin-bottom: 12px;
 }
 
-.royal-card p {
-
+.royal p {
     color:
-        #807863;
+        var(--muted);
 
-    font-size: 10px;
+    font-size: 9px;
 
     line-height: 1.9;
 }
 
 
 /* =========================================================
-   OFFICIAL BOT
+   BOT
 ========================================================= */
 
-.bot-section {
-
-    padding-top: 80px;
-}
-
-.bot-card {
-
-    max-width: 950px;
+.bot {
+    max-width: 1050px;
 
     margin: auto;
-
-    min-height: 350px;
 
     display: grid;
 
     grid-template-columns:
-        250px 1fr;
-
-    position: relative;
-
-    overflow: hidden;
+        260px 1fr;
 
     border:
         1px solid
@@ -1438,34 +1394,11 @@ section {
             rgba(255,255,255,.01)
         );
 
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,.4);
-}
-
-.bot-card::before {
-
-    content:
-        "ASM";
-
-    position: absolute;
-
-    right: -50px;
-    bottom: -90px;
-
-    font-family:
-        Cinzel,
-        serif;
-
-    font-size: 220px;
-
-    font-weight: 900;
-
-    color:
-        rgba(216,173,70,.025);
+    overflow: hidden;
 }
 
 .bot-visual {
+    min-height: 330px;
 
     display: flex;
 
@@ -1475,13 +1408,12 @@ section {
 
     border-right:
         1px solid
-        rgba(216,173,70,.15);
+        rgba(216,173,70,.13);
 }
 
 .bot-orb {
-
-    width: 130px;
-    height: 130px;
+    width: 140px;
+    height: 140px;
 
     border-radius: 50%;
 
@@ -1493,33 +1425,27 @@ section {
 
     font-size: 55px;
 
+    border:
+        1px solid
+        rgba(216,173,70,.5);
+
     background:
         radial-gradient(
             circle,
-            rgba(216,173,70,.2),
-            rgba(216,173,70,.02)
+            rgba(216,173,70,.18),
+            transparent 70%
         );
 
-    border:
-        1px solid
-        rgba(216,173,70,.45);
-
     box-shadow:
-        0 0 50px
-        rgba(216,173,70,.18);
+        0 0 55px
+        rgba(216,173,70,.16);
 
     animation:
         botPulse
-        4s
-        infinite ease-in-out;
+        4s infinite ease-in-out;
 }
 
 @keyframes botPulse {
-
-    0%,100% {
-        transform:
-            scale(1);
-    }
 
     50% {
         transform:
@@ -1527,53 +1453,44 @@ section {
     }
 }
 
-.bot-info {
-
+.bot-content {
     padding:
-        60px 50px;
-
-    position: relative;
-
-    z-index: 2;
+        55px;
 }
 
 .bot-label {
+    color:
+        #aa8a4b;
 
     font-size: 8px;
 
     letter-spacing: 4px;
 
-    color:
-        #b99a51;
-
     margin-bottom: 12px;
 }
 
-.bot-info h3 {
-
+.bot h3 {
     font-family:
-        Cinzel,
-        serif;
-
-    font-size:
-        clamp(
-            35px,
-            5vw,
-            65px
-        );
+        Cinzel, serif;
 
     color:
         var(--gold-light);
 
-    margin-bottom: 15px;
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            75px
+        );
+
+    margin-bottom: 20px;
 }
 
-.bot-info p {
-
-    max-width: 600px;
+.bot p {
+    max-width: 620px;
 
     color:
-        #817966;
+        var(--muted);
 
     font-size: 11px;
 
@@ -1582,73 +1499,126 @@ section {
 
 
 /* =========================================================
-   FINAL CTA
+   CODEX
+========================================================= */
+
+.codex {
+    max-width: 950px;
+
+    margin: auto;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(216,173,70,.025);
+}
+
+.codex-row {
+    display: grid;
+
+    grid-template-columns:
+        70px 1fr;
+
+    padding:
+        25px;
+
+    border-bottom:
+        1px solid
+        rgba(216,173,70,.09);
+}
+
+.codex-row:last-child {
+    border-bottom: none;
+}
+
+.codex-number {
+    color:
+        rgba(216,173,70,.35);
+
+    font-family:
+        Cinzel, serif;
+
+    font-size: 18px;
+}
+
+.codex h3 {
+    font-family:
+        Cinzel, serif;
+
+    color:
+        var(--gold-light);
+
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+.codex p {
+    color:
+        var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   FINAL
 ========================================================= */
 
 .final {
-
-    min-height: 80vh;
+    min-height: 85vh;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
+
+    align-items: center;
 
     text-align: center;
 }
 
-.final-inner {
-
-    max-width: 900px;
-
-    position: relative;
-}
-
-.final-symbol {
-
-    font-size: 55px;
+.final-crown {
+    font-size: 60px;
 
     color:
         var(--gold-light);
 
-    margin-bottom: 25px;
-
     text-shadow:
-        0 0 35px
+        0 0 40px
         rgba(216,173,70,.5);
+
+    margin-bottom: 25px;
 }
 
 .final h2 {
-
     font-family:
-        Cinzel,
-        serif;
+        Cinzel, serif;
+
+    color:
+        var(--gold-light);
 
     font-size:
         clamp(
             45px,
-            8vw,
-            100px
+            9vw,
+            110px
         );
 
-    color:
-        var(--gold-light);
-
-    line-height: .9;
-
-    margin-bottom: 30px;
+    line-height: .85;
 }
 
 .final p {
-
-    color:
-        #837965;
-
-    max-width: 550px;
+    max-width: 600px;
 
     margin:
-        0 auto 35px;
+        30px auto;
+
+    color:
+        var(--muted);
 
     font-size: 12px;
 
@@ -1661,7 +1631,6 @@ section {
 ========================================================= */
 
 footer {
-
     border-top:
         1px solid
         rgba(216,173,70,.12);
@@ -1674,7 +1643,7 @@ footer {
     justify-content: space-between;
 
     color:
-        #665d4b;
+        #625a49;
 
     font-size: 8px;
 
@@ -1683,25 +1652,22 @@ footer {
 
 
 /* =========================================================
-   SCROLL REVEAL
+   REVEAL
 ========================================================= */
 
 .reveal {
-
     opacity: 0;
 
     transform:
-        translateY(45px);
+        translateY(40px);
 
     transition:
-        1.1s
-        cubic-bezier(
+        1s cubic-bezier(
             .2,.8,.2,1
         );
 }
 
 .reveal.active {
-
     opacity: 1;
 
     transform:
@@ -1713,104 +1679,112 @@ footer {
    MOBILE
 ========================================================= */
 
-@media(max-width:1050px) {
+@media(max-width:1000px) {
 
     .royal-grid {
-
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .royal-card:nth-child(3) {
-
-        transform:
-            none;
+    .royal:nth-child(3) {
+        transform: none;
     }
 
-    .royal-card:nth-child(3):hover {
-
+    .royal:nth-child(3):hover {
         transform:
-            translateY(-15px)
-            scale(1.025);
+            translateY(-13px);
+    }
+
+    .intro-grid {
+        grid-template-columns:
+            1fr;
     }
 }
 
 @media(max-width:750px) {
 
     nav {
-
-        height: 70px;
-
         padding:
             0 5%;
     }
 
     .nav-links {
-
         display: none;
     }
 
-    .hero h1 {
-
-        letter-spacing:
-            -2px;
-    }
-
-    .portal {
-
-        width: 400px;
-        height: 400px;
-    }
-
     section {
-
         padding:
             100px 5%;
     }
 
-    .relic-grid {
-
+    .realm-grid,
+    .treasure-grid {
         grid-template-columns:
             1fr;
     }
 
     .royal-grid {
-
         grid-template-columns:
             1fr;
     }
 
-    .royal-card:nth-child(3) {
-
-        transform:
-            none;
+    .stat-stack {
+        grid-template-columns:
+            1fr 1fr;
     }
 
-    .bot-card {
+    .kingdom-map {
+        height: 500px;
+    }
 
+    .map-point {
+        width: 105px;
+    }
+
+    .point-1 {
+        left: 5%;
+    }
+
+    .point-2 {
+        right: 5%;
+    }
+
+    .point-3 {
+        left: 5%;
+    }
+
+    .point-4 {
+        right: 5%;
+    }
+
+    .activity {
+        grid-template-columns:
+            50px 1fr;
+    }
+
+    .activity-tag {
+        display: none;
+    }
+
+    .bot {
         grid-template-columns:
             1fr;
     }
 
     .bot-visual {
-
-        height: 250px;
-
         border-right: none;
 
         border-bottom:
             1px solid
-            rgba(216,173,70,.15);
+            rgba(216,173,70,.13);
     }
 
-    .bot-info {
-
+    .bot-content {
         padding:
-            45px 25px;
+            40px 25px;
     }
 
     footer {
-
         flex-direction:
             column;
 
@@ -1827,21 +1801,17 @@ footer {
 <body>
 
 
-<!-- GOLD DUST -->
-<div id="goldDust"></div>
+<!-- ======================================================
+     EFFECTS
+======================================================= -->
 
-<!-- STARS -->
-<div id="stars"></div>
+<div id="dust"></div>
 
-<!-- MOUSE LIGHT -->
-<div id="mouseGlow"></div>
-
-<!-- VIGNETTE -->
-<div class="vignette"></div>
+<div id="mouseLight"></div>
 
 
 <!-- ======================================================
-     NAVIGATION
+     NAV
 ======================================================= -->
 
 <nav>
@@ -1852,20 +1822,24 @@ footer {
 
     <div class="nav-links">
 
+        <a href="#about">
+            ABOUT
+        </a>
+
         <a href="#realm">
             REALM
         </a>
 
-        <a href="#throne">
-            THRONE
+        <a href="#treasury">
+            TREASURY
+        </a>
+
+        <a href="#map">
+            MAP
         </a>
 
         <a href="#royals">
             ROYALS
-        </a>
-
-        <a href="#asm">
-            ASM
         </a>
 
     </div>
@@ -1873,9 +1847,9 @@ footer {
     <a
         href="https://discord.gg/WWnjfh5tB"
         target="_blank"
-        class="nav-join"
+        class="nav-button"
     >
-        ENTER KINGDOM
+        JOIN KINGDOM
     </a>
 
 </nav>
@@ -1887,12 +1861,12 @@ footer {
 
 <section class="hero">
 
-    <div class="portal"></div>
+    <div class="hero-ring"></div>
 
     <div class="hero-content">
 
-        <div class="royal-eyebrow">
-            BEYOND THE ORDINARY
+        <div class="hero-kicker">
+            THE KINGDOM AWAITS
         </div>
 
         <h1>
@@ -1900,23 +1874,141 @@ footer {
             KINGDOM
         </h1>
 
-        <div class="divider">
+        <div class="hero-divider">
+            <span></span>
             ✦
+            <span></span>
         </div>
 
-        <p class="hero-sub">
-            A kingdom forged for the Roblox community.
-            Games, giveaways, events and people —
-            bound together beneath one crown.
+        <p>
+            Welcome to Lurex Kingdom — a Roblox
+            community built around games, giveaways,
+            events, friendships and everything that
+            makes a community worth returning to.
         </p>
 
         <a
             href="https://discord.gg/WWnjfh5tB"
             target="_blank"
-            class="royal-button"
+            class="gold-button"
         >
             ♛ ENTER THE KINGDOM
         </a>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ABOUT
+======================================================= -->
+
+<section id="about">
+
+    <div class="section-heading reveal">
+
+        <div class="section-kicker">
+            THE CHRONICLE
+        </div>
+
+        <h2>
+            WHAT IS LUREX KINGDOM?
+        </h2>
+
+        <p>
+            More than a Discord server.
+            Lurex is a community designed to bring
+            Roblox players together under one realm.
+        </p>
+
+    </div>
+
+
+    <div class="intro-grid">
+
+        <div class="lore-panel reveal">
+
+            <h3>
+                The Story Of Lurex
+            </h3>
+
+            <p>
+                Lurex Kingdom is a community centered
+                around Roblox, entertainment and people.
+                The idea is simple: create a place where
+                members can jump between games, events,
+                giveaways and conversations without
+                losing the feeling of being part of one
+                community.
+            </p>
+
+            <p>
+                Whether you're here for the next giveaway,
+                looking for people to play with, joining
+                an event or simply hanging out, the kingdom
+                has a place for you.
+            </p>
+
+            <div class="lore-quote">
+                "A kingdom isn't built from walls.
+                It's built from the people inside them."
+            </div>
+
+        </div>
+
+
+        <div class="stat-stack reveal">
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ✦
+                </div>
+
+                <div class="stat-label">
+                    ACTIVE COMMUNITY
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ♜
+                </div>
+
+                <div class="stat-label">
+                    ROBLOX FOCUSED
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    🎁
+                </div>
+
+                <div class="stat-label">
+                    GIVEAWAYS
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ⚡
+                </div>
+
+                <div class="stat-label">
+                    COMMUNITY EVENTS
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -1929,73 +2021,136 @@ footer {
 
 <section id="realm">
 
-    <div class="section-title reveal">
+    <div class="section-heading reveal">
 
-        <div class="small">
-            THE REALM
+        <div class="section-kicker">
+            EXPLORE THE REALM
         </div>
 
         <h2>
-            WITHIN THE KINGDOM
+            WHAT AWAITS INSIDE
         </h2>
+
+        <p>
+            Lurex is designed around different parts
+            of the community so there is always
+            something to discover.
+        </p>
 
     </div>
 
 
-    <div class="relic-grid">
+    <div class="realm-grid">
 
-        <div class="relic reveal">
+        <div class="realm-card reveal">
 
-            <div class="relic-icon">
-                ♜
+            <div class="realm-icon">
+                🎮
             </div>
 
             <h3>
-                GAMES
+                Roblox Gaming
             </h3>
 
             <p>
-                Enter a community built around
-                Roblox games, challenges and
-                experiences shared with the kingdom.
+                Find people to play with, discover
+                games and turn ordinary Roblox
+                sessions into community experiences.
             </p>
 
         </div>
 
 
-        <div class="relic reveal">
+        <div class="realm-card reveal">
 
-            <div class="relic-icon">
-                ✦
+            <div class="realm-icon">
+                🎁
             </div>
 
             <h3>
-                GIVEAWAYS
+                Giveaways
             </h3>
 
             <p>
-                Rewards and giveaways are woven
-                into the kingdom, giving members
-                reasons to keep returning.
+                The kingdom regularly brings
+                opportunities for members to take
+                part in giveaways and community rewards.
             </p>
 
         </div>
 
 
-        <div class="relic reveal">
+        <div class="realm-card reveal">
 
-            <div class="relic-icon">
-                ⚔
+            <div class="realm-icon">
+                ⚔️
             </div>
 
             <h3>
-                EVENTS
+                Events
             </h3>
 
             <p>
-                Community events, activities and
-                moments designed to make Lurex
-                feel alive rather than ordinary.
+                Community activities, special events
+                and challenges give everyone another
+                reason to step through the gates.
+            </p>
+
+        </div>
+
+
+        <div class="realm-card reveal">
+
+            <div class="realm-icon">
+                💬
+            </div>
+
+            <h3>
+                Social
+            </h3>
+
+            <p>
+                Talk, meet new people, share moments
+                and become part of a community that
+                extends beyond Roblox itself.
+            </p>
+
+        </div>
+
+
+        <div class="realm-card reveal">
+
+            <div class="realm-icon">
+                🏆
+            </div>
+
+            <h3>
+                Competition
+            </h3>
+
+            <p>
+                Challenges and community activities
+                can turn friendly competition into
+                memorable moments.
+            </p>
+
+        </div>
+
+
+        <div class="realm-card reveal">
+
+            <div class="realm-icon">
+                👑
+            </div>
+
+            <h3>
+                Community
+            </h3>
+
+            <p>
+                At the center of everything is the
+                community itself — the people who
+                make Lurex what it is.
             </p>
 
         </div>
@@ -2006,74 +2161,334 @@ footer {
 
 
 <!-- ======================================================
-     THRONE
+     TREASURY
 ======================================================= -->
 
-<section id="throne">
+<section
+    id="treasury"
+    class="treasury"
+>
 
-    <div class="throne-background"></div>
+    <div class="section-heading reveal">
 
-    <div class="section-title reveal">
-
-        <div class="small">
-            THE HEART OF LUREX
+        <div class="section-kicker">
+            THE ROYAL TREASURY
         </div>
 
         <h2>
-            THE GOLDEN THRONE
+            REWARDS & GIVEAWAYS
         </h2>
 
+        <p>
+            The treasury represents the reward side
+            of the kingdom — from giveaways to
+            community opportunities.
+        </p>
+
     </div>
 
 
-    <div class="throne reveal">
+    <div class="treasure-grid">
 
-        <div class="throne-crown">
-            ♛
+        <div class="treasure reveal">
+
+            <div class="treasure-symbol">
+                💰
+            </div>
+
+            <h3>
+                Giveaways
+            </h3>
+
+            <p>
+                Keep an eye on the kingdom for
+                future giveaway events and rewards.
+            </p>
+
         </div>
 
-        <div class="throne-back"></div>
 
-        <div class="throne-arm-left"></div>
+        <div class="treasure reveal">
 
-        <div class="throne-arm-right"></div>
+            <div class="treasure-symbol">
+                💎
+            </div>
 
-        <div class="throne-seat"></div>
+            <h3>
+                Community Rewards
+            </h3>
 
-    </div>
+            <p>
+                Community participation can open
+                doors to special events and rewards.
+            </p>
+
+        </div>
 
 
-    <div
-        style="
-        text-align:center;
-        color:#817966;
-        font-family:Cinzel,serif;
-        font-size:10px;
-        letter-spacing:4px;
-        "
-        class="reveal"
-    >
-        ONE KINGDOM · ONE LEGACY · ONE COMMUNITY
+        <div class="treasure reveal">
+
+            <div class="treasure-symbol">
+                🏆
+            </div>
+
+            <h3>
+                Special Events
+            </h3>
+
+            <p>
+                Watch for special occasions where
+                the kingdom opens its treasury.
+            </p>
+
+        </div>
+
     </div>
 
 </section>
 
 
 <!-- ======================================================
-     ROYALS
+     ACTIVITIES
+======================================================= -->
+
+<section id="events">
+
+    <div class="section-heading reveal">
+
+        <div class="section-kicker">
+            LIFE INSIDE THE KINGDOM
+        </div>
+
+        <h2>
+            ALWAYS SOMETHING HAPPENING
+        </h2>
+
+    </div>
+
+
+    <div class="activity-list">
+
+        <div class="activity reveal">
+
+            <div class="activity-number">
+                I
+            </div>
+
+            <div>
+
+                <h3>
+                    Community Events
+                </h3>
+
+                <p>
+                    Join activities designed to bring
+                    members together.
+                </p>
+
+            </div>
+
+            <div class="activity-tag">
+                COMMUNITY
+            </div>
+
+        </div>
+
+
+        <div class="activity reveal">
+
+            <div class="activity-number">
+                II
+            </div>
+
+            <div>
+
+                <h3>
+                    Roblox Sessions
+                </h3>
+
+                <p>
+                    Find people and games to play
+                    together.
+                </p>
+
+            </div>
+
+            <div class="activity-tag">
+                GAMING
+            </div>
+
+        </div>
+
+
+        <div class="activity reveal">
+
+            <div class="activity-number">
+                III
+            </div>
+
+            <div>
+
+                <h3>
+                    Giveaways
+                </h3>
+
+                <p>
+                    Watch the server for upcoming
+                    giveaway opportunities.
+                </p>
+
+            </div>
+
+            <div class="activity-tag">
+                REWARDS
+            </div>
+
+        </div>
+
+
+        <div class="activity reveal">
+
+            <div class="activity-number">
+                IV
+            </div>
+
+            <div>
+
+                <h3>
+                    Community Nights
+                </h3>
+
+                <p>
+                    Hang out, chat and make the
+                    kingdom feel alive.
+                </p>
+
+            </div>
+
+            <div class="activity-tag">
+                SOCIAL
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     MAP
+======================================================= -->
+
+<section id="map" class="map-section">
+
+    <div class="section-heading reveal">
+
+        <div class="section-kicker">
+            THE KINGDOM MAP
+        </div>
+
+        <h2>
+            EXPLORE THE REALM
+        </h2>
+
+        <p>
+            Every part of the kingdom has a purpose.
+            Think of this as your map to Lurex.
+        </p>
+
+    </div>
+
+
+    <div class="kingdom-map reveal">
+
+        <div class="map-grid"></div>
+
+        <div class="map-ring"></div>
+
+        <div class="map-core">
+            LUREX<br>
+            KINGDOM
+        </div>
+
+
+        <div class="map-point point-1">
+
+            <strong>
+                GAME HALL
+            </strong>
+
+            <span>
+                ROBLOX & ACTIVITIES
+            </span>
+
+        </div>
+
+
+        <div class="map-point point-2">
+
+            <strong>
+                TREASURY
+            </strong>
+
+            <span>
+                GIVEAWAYS & REWARDS
+            </span>
+
+        </div>
+
+
+        <div class="map-point point-3">
+
+            <strong>
+                TOWN SQUARE
+            </strong>
+
+            <span>
+                COMMUNITY & CHAT
+            </span>
+
+        </div>
+
+
+        <div class="map-point point-4">
+
+            <strong>
+                EVENT GROUNDS
+            </strong>
+
+            <span>
+                EVENTS & CHALLENGES
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ROYAL COURT
 ======================================================= -->
 
 <section id="royals">
 
-    <div class="section-title reveal">
+    <div class="section-heading reveal">
 
-        <div class="small">
+        <div class="section-kicker">
             THE ROYAL COURT
         </div>
 
         <h2>
-            THOSE WHO BUILT IT
+            THOSE BEHIND THE KINGDOM
         </h2>
+
+        <p>
+            The people responsible for guiding,
+            building and maintaining Lurex Kingdom.
+        </p>
 
     </div>
 
@@ -2083,9 +2498,9 @@ footer {
 
         <!-- DOMINICK -->
 
-        <div class="royal-card reveal">
+        <div class="royal reveal">
 
-            <div class="portrait">
+            <div class="royal-portrait">
 
                 <div class="portrait-ring">
                     👑
@@ -2102,9 +2517,9 @@ footer {
             </h3>
 
             <p>
-                One of the original architects of
-                Lurex Kingdom, shaping the vision
-                behind the realm and its community.
+                One of the founders of Lurex Kingdom,
+                helping shape the vision and identity
+                behind the community.
             </p>
 
         </div>
@@ -2112,9 +2527,9 @@ footer {
 
         <!-- SKYLAR -->
 
-        <div class="royal-card reveal">
+        <div class="royal reveal">
 
-            <div class="portrait">
+            <div class="royal-portrait">
 
                 <div class="portrait-ring">
                     ⚜
@@ -2131,9 +2546,9 @@ footer {
             </h3>
 
             <p>
-                A founding force behind Lurex,
-                helping transform the original idea
-                into a kingdom built for its members.
+                A founding member helping build
+                the community and turn the Lurex
+                vision into a growing kingdom.
             </p>
 
         </div>
@@ -2141,9 +2556,9 @@ footer {
 
         <!-- ASM -->
 
-        <div class="royal-card reveal">
+        <div class="royal reveal">
 
-            <div class="portrait">
+            <div class="royal-portrait">
 
                 <div class="portrait-ring">
                     🤖
@@ -2160,9 +2575,9 @@ footer {
             </h3>
 
             <p>
-                The owner behind the official
-                Lurex Kingdom bot, powering the
-                systems that keep the kingdom moving.
+                The owner of the official Lurex
+                Kingdom bot, responsible for the
+                digital systems powering the server.
             </p>
 
         </div>
@@ -2170,9 +2585,9 @@ footer {
 
         <!-- CHEETO -->
 
-        <div class="royal-card reveal">
+        <div class="royal reveal">
 
-            <div class="portrait">
+            <div class="royal-portrait">
 
                 <div class="portrait-ring">
                     ⚔
@@ -2189,9 +2604,9 @@ footer {
             </h3>
 
             <p>
-                Part of the leadership guiding the
-                kingdom, helping keep its community
-                active and its future moving forward.
+                Part of the leadership behind Lurex,
+                helping manage and guide the kingdom
+                as the community continues to grow.
             </p>
 
         </div>
@@ -2199,9 +2614,9 @@ footer {
 
         <!-- MEOWLY -->
 
-        <div class="royal-card reveal">
+        <div class="royal reveal">
 
-            <div class="portrait">
+            <div class="royal-portrait">
 
                 <div class="portrait-ring">
                     🛡
@@ -2218,13 +2633,12 @@ footer {
             </h3>
 
             <p>
-                A member of the royal court helping
-                shape the community and keep Lurex
-                growing beyond the ordinary.
+                A member of the leadership helping
+                shape the community and keep the
+                kingdom moving forward.
             </p>
 
         </div>
-
 
     </div>
 
@@ -2235,25 +2649,26 @@ footer {
      ASM
 ======================================================= -->
 
-<section
-    class="bot-section"
-    id="asm"
->
+<section id="asm">
 
-    <div class="section-title reveal">
+    <div class="section-heading reveal">
 
-        <div class="small">
-            THE DIGITAL GUARDIAN
+        <div class="section-kicker">
+            DIGITAL GUARDIAN
         </div>
 
         <h2>
-            THE KINGDOM'S MACHINE
+            THE OFFICIAL BOT
         </h2>
+
+        <p>
+            Behind the kingdom's automated side.
+        </p>
 
     </div>
 
 
-    <div class="bot-card reveal">
+    <div class="bot reveal">
 
         <div class="bot-visual">
 
@@ -2264,7 +2679,7 @@ footer {
         </div>
 
 
-        <div class="bot-info">
+        <div class="bot-content">
 
             <div class="bot-label">
                 OFFICIAL LUREX KINGDOM BOT OWNER
@@ -2275,30 +2690,135 @@ footer {
             </h3>
 
             <p>
-                Behind the official Lurex Kingdom bot.
-                From automation to community systems,
-                ASM keeps the digital machinery of the
-                kingdom alive behind the scenes.
+                ASM is the owner behind the official
+                Lurex Kingdom bot — the digital machinery
+                that supports the server behind the scenes.
             </p>
 
-            <div class="divider"
-                style="
-                justify-content:flex-start;
-                margin:30px 0;
-                "
-            >
-                ✦
+            <br>
+
+            <p>
+                From automated systems to community
+                features, the bot forms part of the
+                infrastructure that keeps the kingdom
+                operating.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     CODEX / VALUES
+======================================================= -->
+
+<section id="codex">
+
+    <div class="section-heading reveal">
+
+        <div class="section-kicker">
+            THE KINGDOM CODEX
+        </div>
+
+        <h2>
+            WHAT LUREX STANDS FOR
+        </h2>
+
+    </div>
+
+
+    <div class="codex">
+
+        <div class="codex-row reveal">
+
+            <div class="codex-number">
+                I
             </div>
 
-            <div
-                style="
-                color:#b99a51;
-                font-family:Cinzel,serif;
-                font-size:9px;
-                letter-spacing:3px;
-                "
-            >
-                OFFICIAL · LUREX KINGDOM
+            <div>
+
+                <h3>
+                    Community First
+                </h3>
+
+                <p>
+                    Lurex exists because of the people
+                    inside it. The community is at the
+                    center of the kingdom.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="codex-row reveal">
+
+            <div class="codex-number">
+                II
+            </div>
+
+            <div>
+
+                <h3>
+                    Have Fun
+                </h3>
+
+                <p>
+                    Games, events, conversations and
+                    giveaways are meant to create a
+                    place people actually enjoy visiting.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="codex-row reveal">
+
+            <div class="codex-number">
+                III
+            </div>
+
+            <div>
+
+                <h3>
+                    Build Together
+                </h3>
+
+                <p>
+                    A community becomes stronger when
+                    members contribute ideas, energy
+                    and creativity.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="codex-row reveal">
+
+            <div class="codex-number">
+                IV
+            </div>
+
+            <div>
+
+                <h3>
+                    Make Memories
+                </h3>
+
+                <p>
+                    The goal isn't simply to have
+                    another Discord server. It's to
+                    create moments worth remembering.
+                </p>
+
             </div>
 
         </div>
@@ -2309,32 +2829,32 @@ footer {
 
 
 <!-- ======================================================
-     FINAL
+     FINAL CTA
 ======================================================= -->
 
 <section class="final">
 
-    <div class="final-inner reveal">
+    <div class="reveal">
 
-        <div class="final-symbol">
+        <div class="final-crown">
             ♛
         </div>
 
         <h2>
-            CLAIM<br>
-            YOUR PLACE.
+            THE GATES<br>
+            ARE OPEN.
         </h2>
 
         <p>
-            The kingdom is waiting.
-            Step through the gates and discover
-            everything Lurex has to offer.
+            You've seen the realm.
+            You've seen the court.
+            Now there's only one thing left to do.
         </p>
 
         <a
             href="https://discord.gg/WWnjfh5tB"
             target="_blank"
-            class="royal-button"
+            class="gold-button"
         >
             ENTER LUREX KINGDOM
         </a>
@@ -2364,108 +2884,65 @@ footer {
 <script>
 
 /* =========================================================
-   GOLD PARTICLES
+   GOLD DUST
 ========================================================= */
 
 const dust =
-    document.getElementById("goldDust");
+    document.getElementById("dust");
 
-for(let i = 0; i < 140; i++){
+for(let i = 0; i < 150; i++) {
 
-    const p =
+    const particle =
         document.createElement("div");
 
-    p.className =
-        "gold-particle";
+    particle.className =
+        "dust";
 
-    p.style.left =
+    particle.style.left =
         Math.random() * 100 + "%";
 
-    p.style.top =
-        70 + Math.random() * 30 + "%";
+    particle.style.top =
+        65 + Math.random() * 35 + "%";
 
-    p.style.setProperty(
+    particle.style.setProperty(
         "--x",
         (
             Math.random() * 240 - 120
         ) + "px"
     );
 
-    p.style.setProperty(
-        "--time",
-        (
-            4 + Math.random() * 7
-        ) + "s"
-    );
-
-    p.style.animationDelay =
-        (
-            Math.random() * 8
-        ) + "s";
-
-    dust.appendChild(p);
-}
-
-
-/* =========================================================
-   STARS
-========================================================= */
-
-const stars =
-    document.getElementById("stars");
-
-for(let i = 0; i < 110; i++){
-
-    const star =
-        document.createElement("div");
-
-    star.className =
-        "star";
-
-    star.style.left =
-        Math.random() * 100 + "%";
-
-    star.style.top =
-        Math.random() * 100 + "%";
-
-    star.style.setProperty(
+    particle.style.setProperty(
         "--duration",
         (
-            2 + Math.random() * 5
+            4 + Math.random() * 8
         ) + "s"
     );
 
-    star.style.animationDelay =
-        (
-            Math.random() * 5
-        ) + "s";
+    particle.style.animationDelay =
+        Math.random() * 8 + "s";
 
-    stars.appendChild(star);
+    dust.appendChild(particle);
 }
 
 
 /* =========================================================
-   MOUSE GOLD AURA
+   MOUSE GOLD LIGHT
 ========================================================= */
 
-const mouse =
-    document.getElementById("mouseGlow");
-
-let mouseX = 0;
-let mouseY = 0;
+const mouseLight =
+    document.getElementById(
+        "mouseLight"
+    );
 
 document.addEventListener(
     "mousemove",
-    e => {
+    event => {
 
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        mouseLight.style.left =
+            event.clientX + "px";
 
-        mouse.style.left =
-            mouseX + "px";
-
-        mouse.style.top =
-            mouseY + "px";
+        mouseLight.style.top =
+            event.clientY + "px";
 
     }
 );
@@ -2480,72 +2957,71 @@ const observer =
 
         entries => {
 
-            entries.forEach(
-                entry => {
+            entries.forEach(entry => {
 
-                    if(
-                        entry.isIntersecting
-                    ){
+                if(
+                    entry.isIntersecting
+                ) {
 
-                        entry.target.classList.add(
-                            "active"
-                        );
-
-                    }
+                    entry.target.classList.add(
+                        "active"
+                    );
 
                 }
-            );
+
+            });
 
         },
 
         {
-            threshold: .12
+            threshold: .1
         }
+
     );
 
 
 document
     .querySelectorAll(".reveal")
     .forEach(
-        el =>
-            observer.observe(el)
+        element =>
+            observer.observe(element)
     );
 
 
 /* =========================================================
-   ROYAL CARD 3D EFFECT
+   3D ROYAL CARDS
 ========================================================= */
 
 document
-    .querySelectorAll(".royal-card")
+    .querySelectorAll(".royal")
     .forEach(card => {
 
         card.addEventListener(
             "mousemove",
-            e => {
+            event => {
 
                 const rect =
                     card.getBoundingClientRect();
 
                 const x =
-                    e.clientX -
+                    event.clientX -
                     rect.left;
 
                 const y =
-                    e.clientY -
+                    event.clientY -
                     rect.top;
 
                 const rotateX =
                     (
                         y -
                         rect.height / 2
-                    ) / 25;
+                    ) / 22;
 
                 const rotateY =
                     (
                         rect.width / 2 -
                         x
-                    ) / 25;
+                    ) / 22;
 
                 card.style.transform =
                     `
@@ -2574,101 +3050,57 @@ document
 
 
 /* =========================================================
-   PARALLAX PORTAL
-========================================================= */
-
-const portal =
-    document.querySelector(".portal");
-
-document.addEventListener(
-    "mousemove",
-    e => {
-
-        const x =
-            (
-                window.innerWidth / 2 -
-                e.clientX
-            ) / 50;
-
-        const y =
-            (
-                window.innerHeight / 2 -
-                e.clientY
-            ) / 50;
-
-        portal.style.marginLeft =
-            x + "px";
-
-        portal.style.marginTop =
-            y + "px";
-
-    }
-);
-
-
-/* =========================================================
-   GOLDEN BUTTON SPARK
+   REALM CARD TILT
 ========================================================= */
 
 document
-    .querySelectorAll(".royal-button")
-    .forEach(button => {
+    .querySelectorAll(".realm-card")
+    .forEach(card => {
 
-        button.addEventListener(
-            "mouseenter",
+        card.addEventListener(
+            "mousemove",
+            event => {
+
+                const rect =
+                    card.getBoundingClientRect();
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+                const rx =
+                    (
+                        y -
+                        rect.height / 2
+                    ) / 35;
+
+                const ry =
+                    (
+                        rect.width / 2 -
+                        x
+                    ) / 35;
+
+                card.style.transform =
+                    `
+                    perspective(800px)
+                    rotateX(${rx}deg)
+                    rotateY(${ry}deg)
+                    translateY(-8px)
+                    `;
+
+            }
+        );
+
+        card.addEventListener(
+            "mouseleave",
             () => {
 
-                for(let i = 0; i < 8; i++){
-
-                    const spark =
-                        document.createElement(
-                            "div"
-                        );
-
-                    spark.style.position =
-                        "fixed";
-
-                    spark.style.width =
-                        "3px";
-
-                    spark.style.height =
-                        "3px";
-
-                    spark.style.borderRadius =
-                        "50%";
-
-                    spark.style.background =
-                        "#ffe69a";
-
-                    spark.style.pointerEvents =
-                        "none";
-
-                    spark.style.left =
-                        (
-                            Math.random() * 100
-                        ) + "vw";
-
-                    spark.style.top =
-                        (
-                            Math.random() * 100
-                        ) + "vh";
-
-                    spark.style.boxShadow =
-                        "0 0 10px #d8ad46";
-
-                    spark.style.zIndex =
-                        "200";
-
-                    document.body.appendChild(
-                        spark
-                    );
-
-                    setTimeout(
-                        () => spark.remove(),
-                        800
-                    );
-
-                }
+                card.style.transform =
+                    "";
 
             }
         );
